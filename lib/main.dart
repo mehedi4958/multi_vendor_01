@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:multi_vendor_01/views/landing_customer_screen.dart';
+import 'package:multi_vendor_01/views/auth/landing_customer_screen.dart';
 
 void main() {
   runApp(const MyApp());
