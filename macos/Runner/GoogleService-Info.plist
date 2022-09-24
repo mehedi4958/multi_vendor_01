@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>834673575543-tjkr3am98ga0e6cqlc0i7ta6lmira5km.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.834673575543-tjkr3am98ga0e6cqlc0i7ta6lmira5km</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDHViy1HHHIqv78ORcKc3s3SQg9XEwsKaQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>834673575543</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.multiVendor01</string>
+	<key>PROJECT_ID</key>
+	<string>multi-vendor-01</string>
+	<key>STORAGE_BUCKET</key>
+	<string>multi-vendor-01.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:834673575543:ios:bb3e0c611546b84e03a872</string>
+	<key>DATABASE_URL</key>
+	<string>https://multi-vendor-01-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>
