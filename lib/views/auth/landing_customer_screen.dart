@@ -1,134 +1,197 @@
 import 'package:flutter/material.dart';
 
-class LandingCustomerScreen extends StatelessWidget {
+class LandingCustomerScreen extends StatefulWidget {
   const LandingCustomerScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LandingCustomerScreen> createState() => _LandingCustomerScreenState();
+}
+
+class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
+  bool passwordObscurity = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Create Customer\'s account',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Create Customer\'s Account',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Brand-Regular',
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.person,
+                        size: 35,
+                        color: Colors.cyan,
+                      ),
+                    )
+                  ],
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.person,
-                    size: 35,
-                    color: Colors.cyan,
-                  ),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                const CircleAvatar(
-                  radius: 60,
-                  backgroundColor: Colors.cyan,
+                Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: 60,
+                      backgroundColor: Colors.cyan,
+                    ),
+                    const SizedBox(width: 10),
+                    Column(
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.cyan,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15),
+                            ),
+                          ),
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.camera_alt,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.cyan,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15),
+                            ),
+                          ),
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.photo,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 10),
+                const SizedBox(height: 15),
                 Column(
                   children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.cyan,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15),
-                        ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        label: const Text('Full Name'),
+                        hintText: 'Enter your full name',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25)),
                       ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.camera_alt,
-                          color: Colors.white,
+                    ),
+                    const SizedBox(height: 10),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        label: const Text('Email'),
+                        hintText: 'Enter your email',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25)),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    TextFormField(
+                      obscureText: passwordObscurity,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              passwordObscurity = !passwordObscurity;
+                            });
+                          },
+                          icon: passwordObscurity
+                              ? const Icon(Icons.visibility)
+                              : const Icon(Icons.visibility_off),
+                        ),
+                        label: const Text('Password'),
+                        hintText: 'Enter your password',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
                         ),
                       ),
                     ),
                     const SizedBox(height: 10),
                     Container(
-                      decoration: const BoxDecoration(
+                      width: MediaQuery.of(context).size.width - 60,
+                      height: 50,
+                      decoration: BoxDecoration(
                         color: Colors.cyan,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(15),
-                          bottomRight: Radius.circular(15),
-                        ),
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.photo,
-                          color: Colors.white,
+                      child: const Center(
+                        child: Text(
+                          'Sign up',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 15),
-            Column(
-              children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                    label: const Text('Full Name'),
-                    hintText: 'Enter your full name',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25)),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  decoration: InputDecoration(
-                    label: const Text('Email'),
-                    hintText: 'Enter your email',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25)),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  decoration: InputDecoration(
-                    label: const Text('Email'),
-                    hintText: 'Enter your email',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Already have an account?',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text('Login'),
+                        )
+                      ],
                     ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  width: MediaQuery.of(context).size.width - 60,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.cyan,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Sign up',
+                    const Text(
+                      'Or',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Create a Seller\'s Account',
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text('Sign up'),
+                        )
+                      ],
+                    ),
+                  ],
+                )
               ],
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );
