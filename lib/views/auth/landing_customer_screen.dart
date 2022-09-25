@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:multi_vendor_01/controllers/auth_controller.dart';
 import 'package:multi_vendor_01/controllers/snack_bar_controller.dart';
 
@@ -18,6 +21,22 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
 
   bool passwordObscurity = true;
   bool isLoading = false;
+
+  Uint8List? _image;
+
+  pickImageFromGallery() async {
+    Uint8List img = await _authController.pickImage(ImageSource.gallery);
+    setState(() {
+      _image = img;
+    });
+  }
+
+  pickImageFromCamera() async {
+    Uint8List img = await _authController.pickImage(ImageSource.camera);
+    setState(() {
+      _image = img;
+    });
+  }
 
   signUp() async {
     setState(() {
@@ -72,10 +91,16 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                 ),
                 Row(
                   children: [
-                    const CircleAvatar(
-                      radius: 60,
-                      backgroundColor: Colors.cyan,
-                    ),
+                    _image != null
+                        ? CircleAvatar(
+                            radius: 60,
+                            backgroundColor: Colors.cyan,
+                            backgroundImage: MemoryImage(_image!),
+                          )
+                        : const CircleAvatar(
+                            radius: 60,
+                            backgroundColor: Colors.cyan,
+                          ),
                     const SizedBox(width: 10),
                     Column(
                       children: [
@@ -88,7 +113,9 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                             ),
                           ),
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              pickImageFromCamera();
+                            },
                             icon: const Icon(
                               Icons.camera_alt,
                               color: Colors.white,
@@ -105,7 +132,9 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                             ),
                           ),
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              pickImageFromGallery();
+                            },
                             icon: const Icon(
                               Icons.photo,
                               color: Colors.white,

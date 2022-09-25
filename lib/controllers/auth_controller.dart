@@ -9,7 +9,7 @@ class AuthController {
   // FUNCTION TO PICK IMAGE FROM GALLERY OR CAMERS
 
   pickImage(ImageSource source) async {
-    final ImagePicker _imagePicker = ImagePicker();
+    final _imagePicker = ImagePicker();
     XFile? _file = await _imagePicker.pickImage(source: source);
     if (_file != null) {
       return _file.readAsBytes();
