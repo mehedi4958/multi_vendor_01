@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multi_vendor_01/controllers/auth_controller.dart';
+import 'package:multi_vendor_01/controllers/snack_bar_controller.dart';
 
 class LandingCustomerScreen extends StatefulWidget {
   const LandingCustomerScreen({Key? key}) : super(key: key);
@@ -16,6 +17,26 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
   final _passwordController = TextEditingController();
 
   bool passwordObscurity = true;
+  bool isLoading = false;
+
+  signUp() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    String res = await _authController.signUpUsers(_fullNameController.text,
+        _emailController.text, _passwordController.text);
+
+    setState(() {
+      isLoading = false;
+    });
+
+    if (res != 'success') {
+      return snackBar(context, res);
+    } else {
+      print('You have navigated to the Home Screen');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,11 +163,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                     const SizedBox(height: 10),
                     GestureDetector(
                       onTap: () {
-                        _authController.signUpUsers(
-                          _fullNameController.text,
-                          _emailController.text,
-                          _passwordController.text,
-                        );
+                        signUp();
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width - 60,
@@ -155,15 +172,19 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                           color: Colors.cyan,
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: const Center(
-                          child: Text(
-                            'Sign up',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                        child: Center(
+                          child: isLoading
+                              ? const CircularProgressIndicator(
+                                  color: Colors.white,
+                                )
+                              : const Text(
+                                  'Sign up',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                         ),
                       ),
                     ),
