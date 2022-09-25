@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_vendor_01/controllers/auth_controller.dart';
 
 class LandingCustomerScreen extends StatefulWidget {
   const LandingCustomerScreen({Key? key}) : super(key: key);
@@ -8,6 +9,12 @@ class LandingCustomerScreen extends StatefulWidget {
 }
 
 class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
+  final _authController = AuthController();
+
+  final _fullNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   bool passwordObscurity = true;
 
   @override
@@ -92,6 +99,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                 Column(
                   children: [
                     TextFormField(
+                      controller: _fullNameController,
                       decoration: InputDecoration(
                         label: const Text('Full Name'),
                         hintText: 'Enter your full name',
@@ -101,6 +109,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                         label: const Text('Email'),
                         hintText: 'Enter your email',
@@ -110,6 +119,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
+                      controller: _passwordController,
                       obscureText: passwordObscurity,
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
@@ -130,20 +140,29 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Container(
-                      width: MediaQuery.of(context).size.width - 60,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.cyan,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Sign up',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                    GestureDetector(
+                      onTap: () {
+                        _authController.signUpUsers(
+                          _fullNameController.text,
+                          _emailController.text,
+                          _passwordController.text,
+                        );
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 60,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.cyan,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Sign up',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
