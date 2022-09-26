@@ -33,7 +33,7 @@ class AuthController {
     }
   }
 
-  /// METHOD TO SIGNUP USER
+  /// METHOD FOR SIGNUP USER
 
   Future<String> signUpUsers(
       String fullName, String email, String password, Uint8List? image) async {
@@ -56,6 +56,25 @@ class AuthController {
       } else {
         res = 'Fields must not be empty.';
         print('Fields must not be empty.');
+      }
+    } catch (e) {
+      res = e.toString();
+    }
+    return res;
+  }
+
+  /// METHOD FOR USER SIGN IN
+
+  Future<String> loginUsers(String email, String password) async {
+    String res = 'some error occurred';
+    try {
+      if (email.isNotEmpty && password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        res = 'success';
+        print('Logged in successfully');
+      } else {
+        res = 'Fields must not be empty';
       }
     } catch (e) {
       res = e.toString();

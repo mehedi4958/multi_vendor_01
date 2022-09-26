@@ -54,7 +54,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
     if (res != 'success') {
       return snackBar(context, res);
     } else {
-      print('You have navigated to the Home Screen');
+      return const CustomerLoginScreen();
     }
   }
 

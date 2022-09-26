@@ -22,6 +22,19 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
   bool passwordObscurity = true;
   bool isLoading = false;
 
+  loginUsers() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    await _authController.loginUsers(
+        _emailController.text, _passwordController.text);
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +103,9 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                     ),
                     const SizedBox(height: 10),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        loginUsers();
+                      },
                       child: Container(
                         width: MediaQuery.of(context).size.width - 60,
                         height: 50,
