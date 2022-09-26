@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_vendor_01/controllers/auth_controller.dart';
 import 'package:multi_vendor_01/controllers/snack_bar_controller.dart';
+import 'package:multi_vendor_01/views/auth/customer_login_screen.dart';
 
 class LandingCustomerScreen extends StatefulWidget {
   const LandingCustomerScreen({Key? key}) : super(key: key);
@@ -228,7 +229,14 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const CustomerLoginScreen(),
+                              ),
+                            );
+                          },
                           child: const Text('Login'),
                         )
                       ],
