@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multi_vendor_01/views/home_screen.dart';
+import 'package:multi_vendor_01/views/profile_screen.dart';
 
 class CustomerHomeScreen extends StatefulWidget {
   const CustomerHomeScreen({Key? key}) : super(key: key);
@@ -9,14 +10,14 @@ class CustomerHomeScreen extends StatefulWidget {
 }
 
 class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
-  int _selectedItem = 0;
+  int _selectedItem = 4;
 
   final _pages = <Widget>[
     const HomeScreen(),
     const Center(child: Text('Category Screen')),
     const Center(child: Text('Shop Screen')),
     const Center(child: Text('Cart Screen')),
-    const Center(child: Text('Profile Screen')),
+    const ProfileScreen(),
   ];
 
   @override
