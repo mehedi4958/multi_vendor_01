@@ -11,6 +11,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade300,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -35,6 +36,57 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Container(
+                  height: 80,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Cart',
+                          style: TextStyle(
+                              fontSize: 23,
+                              color: Colors.cyan,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Order',
+                          style: TextStyle(
+                            fontSize: 23,
+                            color: Colors.cyan,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Wishlist',
+                          style: TextStyle(
+                            fontSize: 23,
+                            color: Colors.cyan,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ],
