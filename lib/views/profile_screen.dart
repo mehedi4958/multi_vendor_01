@@ -51,35 +51,72 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Cart',
-                          style: TextStyle(
-                              fontSize: 23,
-                              color: Colors.cyan,
-                              fontWeight: FontWeight.bold),
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.black26,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            bottomLeft: Radius.circular(25),
+                          ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Order',
-                          style: TextStyle(
-                            fontSize: 23,
-                            color: Colors.cyan,
-                            fontWeight: FontWeight.bold,
+                        child: TextButton(
+                          onPressed: () {},
+                          child: SizedBox(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            child: const Center(
+                              child: Text(
+                                'Cart',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Wishlist',
-                          style: TextStyle(
-                            fontSize: 23,
-                            color: Colors.cyan,
-                            fontWeight: FontWeight.bold,
+                      Container(
+                        color: Colors.cyan,
+                        child: TextButton(
+                          onPressed: () {},
+                          child: SizedBox(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            child: const Center(
+                              child: Text(
+                                'Order',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.black26,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(25),
+                            bottomRight: Radius.circular(25),
+                          ),
+                        ),
+                        child: TextButton(
+                          onPressed: () {},
+                          child: SizedBox(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            child: const Center(
+                              child: Text(
+                                'Wishlist',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
                           ),
                         ),
                       ),
