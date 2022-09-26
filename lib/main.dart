@@ -1,8 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_vendor_01/firebase_options.dart';
-import 'package:multi_vendor_01/views/auth/customer_login_screen.dart';
-import 'package:multi_vendor_01/views/auth/landing_customer_screen.dart';
+import 'package:multi_vendor_01/views/customer_home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Brand-Bold',
       ),
-      home: const CustomerLoginScreen(),
+      home: const CustomerHomeScreen(),
     );
   }
 }
