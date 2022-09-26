@@ -123,6 +123,88 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    SizedBox(
+                      height: 40,
+                      width: 50,
+                      child: Divider(
+                        color: Colors.cyan,
+                        thickness: 1.6,
+                      ),
+                    ),
+                    Text(
+                      'Account info',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                      width: 50,
+                      child: Divider(
+                        color: Colors.cyan,
+                        thickness: 1.6,
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    height: 280,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Column(
+                      children: const [
+                        ListTile(
+                          title: Text('Email Address'),
+                          subtitle: Text('m@mail.com'),
+                          leading: Icon(
+                            Icons.email,
+                            color: Colors.cyan,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Divider(
+                            color: Colors.cyan,
+                            thickness: 1.6,
+                          ),
+                        ),
+                        ListTile(
+                          title: Text('Phone no'),
+                          subtitle: Text('0123456789'),
+                          leading: Icon(
+                            Icons.phone,
+                            color: Colors.cyan,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Divider(
+                            color: Colors.cyan,
+                            thickness: 1.6,
+                          ),
+                        ),
+                        ListTile(
+                          title: Text('Address'),
+                          subtitle: Text('abc ABC'),
+                          leading: Icon(
+                            Icons.location_pin,
+                            color: Colors.cyan,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
