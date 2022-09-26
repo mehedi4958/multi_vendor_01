@@ -34,6 +34,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
+                  child: Row(
+                    children: const [
+                      SizedBox(width: 15),
+                      CircleAvatar(
+                        backgroundColor: Colors.black87,
+                        radius: 50,
+                        backgroundImage:
+                            AssetImage('assets/images/app_logo/guest.jpg'),
+                      ),
+                      SizedBox(width: 25),
+                      Text(
+                        'GUEST',
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -124,35 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    SizedBox(
-                      height: 40,
-                      width: 50,
-                      child: Divider(
-                        color: Colors.cyan,
-                        thickness: 1.6,
-                      ),
-                    ),
-                    Text(
-                      'Account info',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 40,
-                      width: 50,
-                      child: Divider(
-                        color: Colors.cyan,
-                        thickness: 1.6,
-                      ),
-                    ),
-                  ],
-                ),
+                const RepeatedDivider(title: 'Account Info'),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Container(
@@ -163,13 +154,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     child: Column(
                       children: const [
-                        ListTile(
-                          title: Text('Email Address'),
-                          subtitle: Text('m@mail.com'),
-                          leading: Icon(
-                            Icons.email,
-                            color: Colors.cyan,
-                          ),
+                        RepeatedListTile(
+                          title: 'Email Address',
+                          subtitle: 'm@mailcom',
+                          leading: Icons.email,
                         ),
                         Padding(
                           padding: EdgeInsets.all(8.0),
@@ -178,13 +166,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             thickness: 1.6,
                           ),
                         ),
-                        ListTile(
-                          title: Text('Phone no'),
-                          subtitle: Text('0123456789'),
-                          leading: Icon(
-                            Icons.phone,
-                            color: Colors.cyan,
-                          ),
+                        RepeatedListTile(
+                          title: 'Phone No',
+                          subtitle: '0123456789',
+                          leading: Icons.phone,
                         ),
                         Padding(
                           padding: EdgeInsets.all(8.0),
@@ -193,14 +178,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             thickness: 1.6,
                           ),
                         ),
-                        ListTile(
-                          title: Text('Address'),
-                          subtitle: Text('abc ABC'),
-                          leading: Icon(
-                            Icons.location_pin,
+                        RepeatedListTile(
+                            title: 'Address',
+                            subtitle: 'abc, ABC',
+                            leading: Icons.location_pin)
+                      ],
+                    ),
+                  ),
+                ),
+                const RepeatedDivider(title: 'Account Settings'),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    height: 280,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Column(
+                      children: const [
+                        RepeatedListTile(
+                          title: 'Edit Profile',
+                          subtitle: '',
+                          leading: Icons.edit,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Divider(
                             color: Colors.cyan,
+                            thickness: 1.6,
                           ),
                         ),
+                        RepeatedListTile(
+                          title: 'Change Password',
+                          subtitle: '',
+                          leading: Icons.lock,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Divider(
+                            color: Colors.cyan,
+                            thickness: 1.6,
+                          ),
+                        ),
+                        RepeatedListTile(
+                          title: 'Logout',
+                          subtitle: '',
+                          leading: Icons.logout,
+                        )
                       ],
                     ),
                   ),
@@ -209,6 +234,70 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class RepeatedDivider extends StatelessWidget {
+  const RepeatedDivider({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(
+          height: 40,
+          width: 50,
+          child: Divider(
+            color: Colors.cyan,
+            thickness: 1.6,
+          ),
+        ),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            color: Colors.black,
+          ),
+        ),
+        const SizedBox(
+          height: 40,
+          width: 50,
+          child: Divider(
+            color: Colors.cyan,
+            thickness: 1.6,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class RepeatedListTile extends StatelessWidget {
+  const RepeatedListTile(
+      {Key? key,
+      required this.title,
+      required this.subtitle,
+      required this.leading})
+      : super(key: key);
+
+  final String title;
+  final String subtitle;
+  final IconData leading;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(title),
+      subtitle: Text(subtitle),
+      leading: Icon(
+        leading,
+        color: Colors.cyan,
       ),
     );
   }
