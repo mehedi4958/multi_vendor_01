@@ -10,7 +10,7 @@ class AuthController {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
 
-  // FUNCTION TO UPLOAD IMAGE TO STORAGE
+  /// METHOD TO UPLOAD IMAGE TO STORAGE
 
   Future<String> _uploadImageToStorage(Uint8List? image) async {
     Reference reference =
@@ -21,7 +21,7 @@ class AuthController {
     return downloadUrl;
   }
 
-  // FUNCTION TO PICK IMAGE FROM GALLERY OR CAMERS
+  /// METHOD TO PICK IMAGE FROM GALLERY OR CAMERS
 
   pickImage(ImageSource source) async {
     final imagePicker = ImagePicker();
@@ -32,6 +32,8 @@ class AuthController {
       print('No Image Selected');
     }
   }
+
+  /// METHOD TO SIGNUP USER
 
   Future<String> signUpUsers(
       String fullName, String email, String password, Uint8List? image) async {
