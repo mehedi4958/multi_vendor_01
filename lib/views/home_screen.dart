@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_vendor_01/views/inner_screens/search_screens.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,48 +10,57 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Container(
-          height: 40,
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 1.6,
-              color: Colors.cyan,
+        title: InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) => const SearchScreen(),
+              ),
+            );
+          },
+          child: Container(
+            height: 40,
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 1.6,
+                color: Colors.cyan,
+              ),
+              borderRadius: BorderRadius.circular(25),
             ),
-            borderRadius: BorderRadius.circular(25),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Icon(
-                Icons.search,
-                color: Colors.grey,
-                size: 30,
-              ),
-              const Text(
-                'What are you looking for?',
-                style: TextStyle(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Icon(
+                  Icons.search,
                   color: Colors.grey,
-                  fontSize: 18,
+                  size: 30,
                 ),
-              ),
-              Container(
-                height: 33,
-                width: 74,
-                decoration: BoxDecoration(
-                  color: Colors.cyan,
-                  borderRadius: BorderRadius.circular(25),
+                const Text(
+                  'What are you looking for?',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 18,
+                  ),
                 ),
-                child: const Center(
-                  child: Text(
-                    'Search',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
+                Container(
+                  height: 33,
+                  width: 74,
+                  decoration: BoxDecoration(
+                    color: Colors.cyan,
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Search',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
