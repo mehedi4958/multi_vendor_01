@@ -1,10 +1,8 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:multi_vendor_01/controllers/auth_controller.dart';
 import 'package:multi_vendor_01/controllers/snack_bar_controller.dart';
 import 'package:multi_vendor_01/views/auth/landing_customer_screen.dart';
+import 'package:multi_vendor_01/views/customer_home_screen.dart';
 
 class CustomerLoginScreen extends StatefulWidget {
   const CustomerLoginScreen({Key? key}) : super(key: key);
@@ -27,12 +25,22 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
       isLoading = true;
     });
 
-    await _authController.loginUsers(
+    String res = await _authController.loginUsers(
         _emailController.text, _passwordController.text);
 
     setState(() {
       isLoading = false;
     });
+
+    if (res != 'success') {
+      return snackBar(context, res);
+    } else {
+      return Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) => CustomerHomeScreen(),
+        ),
+      );
+    }
   }
 
   @override
