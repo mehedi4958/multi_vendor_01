@@ -67,38 +67,10 @@ class HomeScreen extends StatelessWidget {
           ),
           bottom: const TabBar(
             tabs: [
-              Tab(
-                child: Text(
-                  'Men',
-                  style: TextStyle(
-                    color: Colors.black87,
-                  ),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  'Women',
-                  style: TextStyle(
-                    color: Colors.black87,
-                  ),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  'Kids',
-                  style: TextStyle(
-                    color: Colors.black87,
-                  ),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  'Shoes',
-                  style: TextStyle(
-                    color: Colors.black87,
-                  ),
-                ),
-              ),
+              RepeatedTab(title: 'Men'),
+              RepeatedTab(title: 'Women'),
+              RepeatedTab(title: 'Kids'),
+              RepeatedTab(title: 'Shoes'),
             ],
           ),
         ),
@@ -125,6 +97,24 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class RepeatedTab extends StatelessWidget {
+  const RepeatedTab({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Tab(
+      child: Text(
+        title,
+        style: const TextStyle(
+          color: Colors.black87,
         ),
       ),
     );
