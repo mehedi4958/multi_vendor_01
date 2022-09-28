@@ -53,18 +53,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                         child: Row(
-                          children: const [
-                            SizedBox(width: 15),
+                          children: [
+                            const SizedBox(width: 15),
                             CircleAvatar(
                               backgroundColor: Colors.black87,
                               radius: 50,
-                              backgroundImage: AssetImage(
-                                  'assets/images/app_logo/guest.jpg'),
+                              backgroundImage: NetworkImage('${data['image']}'),
                             ),
-                            SizedBox(width: 25),
+                            const SizedBox(width: 25),
                             Text(
-                              'GUEST',
-                              style: TextStyle(
+                              '${data['fullName']}',
+                              style: const TextStyle(
                                 fontSize: 25,
                                 color: Colors.white,
                               ),
@@ -174,32 +173,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Column(
-                            children: const [
+                            children: [
                               RepeatedListTile(
                                 title: 'Email Address',
-                                subtitle: 'm@mailcom',
+                                subtitle: '${data['email']}',
                                 leading: Icons.email,
                               ),
-                              Padding(
+                              const Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Divider(
                                   color: Colors.cyan,
                                   thickness: 1.6,
                                 ),
                               ),
-                              RepeatedListTile(
+                              const RepeatedListTile(
                                 title: 'Phone No',
                                 subtitle: '0123456789',
                                 leading: Icons.phone,
                               ),
-                              Padding(
+                              const Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Divider(
                                   color: Colors.cyan,
                                   thickness: 1.6,
                                 ),
                               ),
-                              RepeatedListTile(
+                              const RepeatedListTile(
                                   title: 'Address',
                                   subtitle: 'abc, ABC',
                                   leading: Icons.location_pin)
