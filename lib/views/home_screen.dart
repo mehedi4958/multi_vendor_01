@@ -12,42 +12,6 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          bottom: const TabBar(
-            tabs: [
-              Tab(
-                child: Text(
-                  'Men',
-                  style: TextStyle(
-                    color: Colors.black87,
-                  ),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  'Women',
-                  style: TextStyle(
-                    color: Colors.black87,
-                  ),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  'Kids',
-                  style: TextStyle(
-                    color: Colors.black87,
-                  ),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  'Shoes',
-                  style: TextStyle(
-                    color: Colors.black87,
-                  ),
-                ),
-              ),
-            ],
-          ),
           title: InkWell(
             onTap: () {
               Navigator.of(context).push(
@@ -101,6 +65,66 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
+          bottom: const TabBar(
+            tabs: [
+              Tab(
+                child: Text(
+                  'Men',
+                  style: TextStyle(
+                    color: Colors.black87,
+                  ),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'Women',
+                  style: TextStyle(
+                    color: Colors.black87,
+                  ),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'Kids',
+                  style: TextStyle(
+                    color: Colors.black87,
+                  ),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'Shoes',
+                  style: TextStyle(
+                    color: Colors.black87,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        body: const TabBarView(
+          children: [
+            Center(
+              child: Text(
+                'Men Category',
+              ),
+            ),
+            Center(
+              child: Text(
+                'Women Category',
+              ),
+            ),
+            Center(
+              child: Text(
+                'Kid Category',
+              ),
+            ),
+            Center(
+              child: Text(
+                'Shoe Category',
+              ),
+            ),
+          ],
         ),
       ),
     );
