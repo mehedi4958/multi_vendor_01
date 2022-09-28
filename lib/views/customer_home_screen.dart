@@ -11,7 +11,7 @@ class CustomerHomeScreen extends StatefulWidget {
 }
 
 class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
-  int _selectedItem = 3;
+  int _selectedItem = 0;
 
   final _pages = <Widget>[
     const HomeScreen(),
