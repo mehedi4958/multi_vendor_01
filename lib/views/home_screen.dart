@@ -10,6 +10,7 @@ class HomeScreen extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           elevation: 0,
           title: InkWell(

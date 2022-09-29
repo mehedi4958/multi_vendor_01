@@ -33,6 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             body: CustomScrollView(
               slivers: [
                 SliverAppBar(
+                  automaticallyImplyLeading: false,
                   elevation: 0,
                   //backgroundColor: Colors.white,
                   expandedHeight: 140,
