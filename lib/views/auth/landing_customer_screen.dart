@@ -7,6 +7,7 @@ import 'package:multi_vendor_01/controllers/snack_bar_controller.dart';
 import 'package:multi_vendor_01/views/auth/customer_login_screen.dart';
 
 class LandingCustomerScreen extends StatefulWidget {
+  static const String routeName = "LandingCustomerScreen";
   const LandingCustomerScreen({Key? key}) : super(key: key);
 
   @override

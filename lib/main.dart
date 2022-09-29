@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:multi_vendor_01/firebase_options.dart';
 import 'package:multi_vendor_01/views/auth/customer_login_screen.dart';
+import 'package:multi_vendor_01/views/auth/landing_customer_screen.dart';
+import 'package:multi_vendor_01/views/cart_screen.dart';
 import 'package:multi_vendor_01/views/customer_home_screen.dart';
+import 'package:multi_vendor_01/views/home_screen.dart';
+import 'package:multi_vendor_01/views/inner_screens/search_screens.dart';
+import 'package:multi_vendor_01/views/profile_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +31,17 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.cyan,
         fontFamily: 'Brand-Bold',
       ),
-      home: const CustomerLoginScreen(),
+      initialRoute: LandingCustomerScreen.routeName,
+      routes: {
+        LandingCustomerScreen.routeName: (context) =>
+            const LandingCustomerScreen(),
+        CustomerLoginScreen.routeName: (context) => const CustomerLoginScreen(),
+        HomeScreen.routeName: (context) => const HomeScreen(),
+        CustomerHomeScreen.routeName: (context) => const CustomerHomeScreen(),
+        ProfileScreen.routeName: (context) => const ProfileScreen(),
+        CartScreen.routeName: (context) => const CartScreen(),
+        SearchScreen.routeName: (context) => const SearchScreen(),
+      },
     );
   }
 }

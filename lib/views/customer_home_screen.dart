@@ -4,6 +4,7 @@ import 'package:multi_vendor_01/views/home_screen.dart';
 import 'package:multi_vendor_01/views/profile_screen.dart';
 
 class CustomerHomeScreen extends StatefulWidget {
+  static const String routeName = 'CustomerHomeScreen';
   const CustomerHomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -11,7 +12,7 @@ class CustomerHomeScreen extends StatefulWidget {
 }
 
 class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
-  int _selectedItem = 4;
+  int _selectedItem = 0;
 
   final _pages = <Widget>[
     const HomeScreen(),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatelessWidget {
+  static const String routeName = 'SearchScreen';
   const SearchScreen({Key? key}) : super(key: key);
 
   @override

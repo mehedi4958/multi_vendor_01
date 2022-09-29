@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
+  static const String routeName = 'ProfileScreen';
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
@@ -33,7 +34,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             body: CustomScrollView(
               slivers: [
                 SliverAppBar(
-                  automaticallyImplyLeading: false,
                   elevation: 0,
                   //backgroundColor: Colors.white,
                   expandedHeight: 140,

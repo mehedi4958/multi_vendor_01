@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:multi_vendor_01/views/inner_screens/search_screens.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const String routeName = 'HomeScreen';
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -10,7 +11,6 @@ class HomeScreen extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           elevation: 0,
           title: InkWell(

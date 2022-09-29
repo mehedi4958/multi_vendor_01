@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatelessWidget {
+  static const String routeName = 'CartScreen';
   const CartScreen({Key? key}) : super(key: key);
 
   @override
@@ -9,7 +10,7 @@ class CartScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Cart',
           style: TextStyle(
             fontSize: 22,

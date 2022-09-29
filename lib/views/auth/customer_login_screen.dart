@@ -5,6 +5,7 @@ import 'package:multi_vendor_01/views/auth/landing_customer_screen.dart';
 import 'package:multi_vendor_01/views/customer_home_screen.dart';
 
 class CustomerLoginScreen extends StatefulWidget {
+  static const String routeName = 'CustomerLoginScreen';
   const CustomerLoginScreen({Key? key}) : super(key: key);
 
   @override
@@ -35,11 +36,8 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
     if (res != 'success') {
       return snackBar(context, res);
     } else {
-      return Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (BuildContext context) => CustomerHomeScreen(),
-        ),
-      );
+      return Navigator.of(context).pushNamedAndRemoveUntil(
+          CustomerHomeScreen.routeName, (route) => false);
     }
   }
 
