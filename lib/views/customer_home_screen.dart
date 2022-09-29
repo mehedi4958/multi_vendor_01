@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multi_vendor_01/views/cart_screen.dart';
+import 'package:multi_vendor_01/views/category_screen.dart';
 import 'package:multi_vendor_01/views/home_screen.dart';
 import 'package:multi_vendor_01/views/profile_screen.dart';
 
@@ -12,11 +13,11 @@ class CustomerHomeScreen extends StatefulWidget {
 }
 
 class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
-  int _selectedItem = 0;
+  int _selectedItem = 1;
 
   final _pages = <Widget>[
     const HomeScreen(),
-    const Center(child: Text('Category Screen')),
+    const CategoryScreen(),
     const Center(child: Text('Shop Screen')),
     const CartScreen(),
     const ProfileScreen(),

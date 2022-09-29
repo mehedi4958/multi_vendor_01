@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.cyan,
         fontFamily: 'Brand-Bold',
       ),
-      initialRoute: LandingCustomerScreen.routeName,
+      initialRoute: CustomerHomeScreen.routeName,
       routes: {
         LandingCustomerScreen.routeName: (context) =>
             const LandingCustomerScreen(),
