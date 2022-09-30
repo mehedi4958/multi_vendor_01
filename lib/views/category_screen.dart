@@ -61,6 +61,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               width: MediaQuery.of(context).size.width * 0.8,
               color: Colors.white,
               child: PageView(
+                controller: _pageController,
                 onPageChanged: (value) {
                   for (var item in _items) {
                     item.isSelected = false;
@@ -70,7 +71,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   });
                 },
                 scrollDirection: Axis.vertical,
-                children: const [
+                children: [
                   MenCategoryScreen(),
                   Center(
                     child: Text('Women'),

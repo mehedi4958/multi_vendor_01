@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:multi_vendor_01/views/minor_screens/sub_category_screen.dart';
+
+import '../../utilities/category_list.dart';
 
 class MenCategoryScreen extends StatelessWidget {
   const MenCategoryScreen({Key? key}) : super(key: key);
@@ -9,10 +12,10 @@ class MenCategoryScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.all(25),
+          padding: EdgeInsets.all(25.0),
           child: Text(
             'Men',
-            style: TextStyle(fontSize: 24),
+            style: TextStyle(fontSize: 24.0),
           ),
         ),
         SizedBox(
@@ -22,13 +25,33 @@ class MenCategoryScreen extends StatelessWidget {
             crossAxisSpacing: 15,
             mainAxisSpacing: 70,
             children: List.generate(
-              6,
+              men.length,
               (index) => Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  color: Colors.cyan,
-                  height: 50,
-                  width: 50,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return SubCategoryScreen(
+                            mainCategory: 'Men',
+                            subCategoryName: men[index],
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: Image.asset('assets/images/men/men$index.jpg'),
+                      ),
+                      Text(men[index]),
+                    ],
+                  ),
                 ),
               ),
             ),
