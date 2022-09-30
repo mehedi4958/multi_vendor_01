@@ -89,12 +89,12 @@ class HomeScreen extends StatelessWidget {
             ),
             Center(
               child: Text(
-                'Kid Category',
+                'Kids Category',
               ),
             ),
             Center(
               child: Text(
-                'Shoe Category',
+                'Shoes Category',
               ),
             ),
           ],

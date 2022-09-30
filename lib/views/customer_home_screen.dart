@@ -17,7 +17,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
 
   final _pages = <Widget>[
     const HomeScreen(),
-    const CategoryScreen(),
+    CategoryScreen(),
     const Center(child: Text('Shop Screen')),
     const CartScreen(),
     const ProfileScreen(),
@@ -29,8 +29,8 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedItem,
-        selectedItemColor: Colors.cyan,
-        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.black87,
+        unselectedItemColor: Colors.cyan,
         onTap: (index) {
           setState(() {
             _selectedItem = index;
