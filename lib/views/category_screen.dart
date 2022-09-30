@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_vendor_01/views/categories/men_category_screen.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -60,19 +61,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
               width: MediaQuery.of(context).size.width * 0.8,
               color: Colors.white,
               child: PageView(
-                onPageChanged: (vlaue) {
+                onPageChanged: (value) {
                   for (var item in _items) {
                     item.isSelected = false;
                   }
                   setState(() {
-                    _items[vlaue].isSelected = true;
+                    _items[value].isSelected = true;
                   });
                 },
                 scrollDirection: Axis.vertical,
-                children: [
-                  Center(
-                    child: Text('Men'),
-                  ),
+                children: const [
+                  MenCategoryScreen(),
                   Center(
                     child: Text('Women'),
                   ),
