@@ -8,6 +8,8 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  final PageController _pageController = PageController();
+
   final List<ItemData> _items = [
     ItemData(categoryName: 'Men'),
     ItemData(categoryName: 'Women'),
@@ -32,12 +34,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
                     onTap: () {
-                      for (var item in _items) {
-                        item.isSelected = false;
-                      }
-                      setState(() {
-                        _items[index].isSelected = true;
-                      });
+                      _pageController.jumpToPage(index);
                     },
                     child: Container(
                       color: _items[index].isSelected == true
@@ -62,6 +59,34 @@ class _CategoryScreenState extends State<CategoryScreen> {
               height: MediaQuery.of(context).size.height * 0.8,
               width: MediaQuery.of(context).size.width * 0.8,
               color: Colors.white,
+              child: PageView(
+                onPageChanged: (vlaue) {
+                  for (var item in _items) {
+                    item.isSelected = false;
+                  }
+                  setState(() {
+                    _items[vlaue].isSelected = true;
+                  });
+                },
+                scrollDirection: Axis.vertical,
+                children: [
+                  Center(
+                    child: Text('Men'),
+                  ),
+                  Center(
+                    child: Text('Women'),
+                  ),
+                  Center(
+                    child: Text('Kids'),
+                  ),
+                  Center(
+                    child: Text('Shoes'),
+                  ),
+                  Center(
+                    child: Text('Bags'),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
