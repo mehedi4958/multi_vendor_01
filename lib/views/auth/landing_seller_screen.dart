@@ -2,9 +2,11 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_vendor_01/controllers/auth_controller.dart';
+import 'package:multi_vendor_01/controllers/snack_bar_controller.dart';
 import 'package:multi_vendor_01/views/auth/landing_customer_screen.dart';
 import 'package:multi_vendor_01/views/auth/seller_login_screen.dart';
 
@@ -20,6 +22,7 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
   final _authController = AuthController();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -45,22 +48,37 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
     });
   }
 
+  Future<String> _uploadImageToStorage(Uint8List? image) async {
+    Reference reference =
+        _firebaseStorage.ref().child('profile').child(storeName);
+    UploadTask uploadTask = reference.putData(image!);
+    TaskSnapshot taskSnapshot = await uploadTask;
+    String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+    return downloadUrl;
+  }
+
   void signUp() async {
     try {
-      if (_formKey.currentState!.validate()) {
-        await _firebaseAuth.createUserWithEmailAndPassword(
-            email: email, password: password);
-        await _firestore
-            .collection('sellers')
-            .doc(_firebaseAuth.currentUser!.uid)
-            .set({
-          'sid': _firebaseAuth.currentUser!.uid,
-          'storeName': storeName,
-          'email': email,
-          'address': '',
-        });
+      if (_image != null) {
+        if (_formKey.currentState!.validate()) {
+          await _firebaseAuth.createUserWithEmailAndPassword(
+              email: email, password: password);
+          String imageUrl = await _uploadImageToStorage(_image);
+          await _firestore
+              .collection('sellers')
+              .doc(_firebaseAuth.currentUser!.uid)
+              .set({
+            'sid': _firebaseAuth.currentUser!.uid,
+            'storeName': storeName,
+            'email': email,
+            'address': '',
+            'imageUrl': imageUrl,
+          });
+        } else {
+          return snackBar(context, 'Fields must not be empty');
+        }
       } else {
-        print('Please full everything correctly');
+        return snackBar(context, 'Please, pick an image');
       }
     } catch (exception) {
       print(exception);
@@ -169,7 +187,7 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
                           }
                         },
                         onChanged: (String value) {
-                          email = value;
+                          storeName = value;
                         },
                         decoration: InputDecoration(
                           label: const Text('Store Name'),
