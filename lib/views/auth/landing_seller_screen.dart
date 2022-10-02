@@ -1,5 +1,7 @@
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_vendor_01/controllers/auth_controller.dart';
@@ -16,10 +18,12 @@ class LandingSellerScreen extends StatefulWidget {
 
 class _LandingSellerScreenState extends State<LandingSellerScreen> {
   final _authController = AuthController();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  late String fullName;
+  late String storeName;
   late String email;
   late String password;
   bool passwordObscurity = true;
@@ -39,6 +43,28 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
     setState(() {
       _image = img;
     });
+  }
+
+  void signUp() async {
+    try {
+      if (_formKey.currentState!.validate()) {
+        await _firebaseAuth.createUserWithEmailAndPassword(
+            email: email, password: password);
+        await _firestore
+            .collection('sellers')
+            .doc(_firebaseAuth.currentUser!.uid)
+            .set({
+          'sid': _firebaseAuth.currentUser!.uid,
+          'storeName': storeName,
+          'email': email,
+          'address': '',
+        });
+      } else {
+        print('Please full everything correctly');
+      }
+    } catch (exception) {
+      print(exception);
+    }
   }
 
   @override
@@ -137,7 +163,7 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Full name must not be empty';
+                            return 'Store name must not be empty';
                           } else {
                             return null;
                           }
@@ -146,8 +172,8 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
                           email = value;
                         },
                         decoration: InputDecoration(
-                          label: const Text('Full Name'),
-                          hintText: 'Enter your full name',
+                          label: const Text('Store Name'),
+                          hintText: 'Enter store name',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25)),
                         ),
@@ -162,7 +188,7 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
                           }
                         },
                         onChanged: (String value) {
-                          fullName = value;
+                          email = value;
                         },
                         decoration: InputDecoration(
                           label: const Text('Email'),
@@ -175,7 +201,7 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Email must not be empty';
+                            return 'Password must not be empty';
                           } else {
                             return null;
                           }
@@ -205,11 +231,7 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
                       const SizedBox(height: 10),
                       GestureDetector(
                         onTap: () {
-                          if (_formKey.currentState!.validate()) {
-                            print('$fullName\n$email\n$password');
-                          } else {
-                            print('Please, do the right thing.');
-                          }
+                          signUp();
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width - 60,
