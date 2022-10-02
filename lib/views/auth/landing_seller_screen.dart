@@ -19,6 +19,9 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  late String fullName;
+  late String email;
+  late String password;
   bool passwordObscurity = true;
   bool isLoading = false;
 
@@ -139,6 +142,9 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
                             return null;
                           }
                         },
+                        onChanged: (String value) {
+                          email = value;
+                        },
                         decoration: InputDecoration(
                           label: const Text('Full Name'),
                           hintText: 'Enter your full name',
@@ -155,6 +161,9 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
                             return null;
                           }
                         },
+                        onChanged: (String value) {
+                          fullName = value;
+                        },
                         decoration: InputDecoration(
                           label: const Text('Email'),
                           hintText: 'Enter your email',
@@ -170,6 +179,9 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
                           } else {
                             return null;
                           }
+                        },
+                        onChanged: (String value) {
+                          password = value;
                         },
                         obscureText: passwordObscurity,
                         decoration: InputDecoration(
@@ -194,7 +206,7 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
                       GestureDetector(
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
-                            print('Good');
+                            print('$fullName\n$email\n$password');
                           } else {
                             print('Please, do the right thing.');
                           }

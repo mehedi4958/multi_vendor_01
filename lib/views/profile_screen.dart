@@ -15,7 +15,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     CollectionReference customer =
-        FirebaseFirestore.instance.collection('users');
+        FirebaseFirestore.instance.collection('customers');
     return FutureBuilder(
       future: customer.doc(_auth.currentUser!.uid).get(),
       builder:

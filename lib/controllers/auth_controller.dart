@@ -46,10 +46,12 @@ class AuthController {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
         String imageUrl = await _uploadImageToStorage(image);
-        await _fireStore.collection('users').doc(cred.user!.uid).set({
+        await _fireStore.collection('customers').doc(cred.user!.uid).set({
+          'cid': cred.user!.uid,
           'fullName': fullName,
           'email': email,
           'image': imageUrl,
+          'address': '',
         });
         res = 'success';
         print('Account Created');
