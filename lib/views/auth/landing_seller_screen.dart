@@ -5,22 +5,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:multi_vendor_01/controllers/auth_controller.dart';
 import 'package:multi_vendor_01/controllers/snack_bar_controller.dart';
 import 'package:multi_vendor_01/views/auth/customer_login_screen.dart';
-import 'package:multi_vendor_01/views/auth/landing_seller_screen.dart';
 
-class LandingCustomerScreen extends StatefulWidget {
-  static const String routeName = "LandingCustomerScreen";
-  const LandingCustomerScreen({Key? key}) : super(key: key);
+class LandingSellerScreen extends StatefulWidget {
+  static const String routeName = "LandingSellerScreen";
+  const LandingSellerScreen({Key? key}) : super(key: key);
 
   @override
-  State<LandingCustomerScreen> createState() => _LandingCustomerScreenState();
+  State<LandingSellerScreen> createState() => _LandingSellerScreenState();
 }
 
-class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
+class _LandingSellerScreenState extends State<LandingSellerScreen> {
   final _authController = AuthController();
-
-  final _fullNameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
 
   bool passwordObscurity = true;
   bool isLoading = false;
@@ -41,29 +36,6 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
     });
   }
 
-  signUp() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    String res = await _authController.signUpUsers(_fullNameController.text,
-        _emailController.text, _passwordController.text, _image);
-
-    setState(() {
-      isLoading = false;
-    });
-
-    if (res != 'success') {
-      return snackBar(context, res);
-    } else {
-      return Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (BuildContext context) => const CustomerLoginScreen(),
-        ),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +50,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      'Create Customer\'s Account',
+                      'Create Seller\'s Account',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -156,7 +128,6 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                 Column(
                   children: [
                     TextFormField(
-                      controller: _fullNameController,
                       decoration: InputDecoration(
                         label: const Text('Full Name'),
                         hintText: 'Enter your full name',
@@ -166,7 +137,6 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
-                      controller: _emailController,
                       decoration: InputDecoration(
                         label: const Text('Email'),
                         hintText: 'Enter your email',
@@ -176,7 +146,6 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
-                      controller: _passwordController,
                       obscureText: passwordObscurity,
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
@@ -198,9 +167,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                     ),
                     const SizedBox(height: 10),
                     GestureDetector(
-                      onTap: () {
-                        signUp();
-                      },
+                      onTap: () {},
                       child: Container(
                         width: MediaQuery.of(context).size.width - 60,
                         height: 50,
@@ -265,10 +232,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, LandingSellerScreen.routeName);
-                          },
+                          onPressed: () {},
                           child: const Text('Sign up'),
                         )
                       ],
