@@ -81,7 +81,7 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
         return snackBar(context, 'Please, pick an image');
       }
     } catch (exception) {
-      print(exception);
+      snackBar(context, '$exception');
     }
   }
 
