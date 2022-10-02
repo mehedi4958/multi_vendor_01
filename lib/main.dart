@@ -5,6 +5,7 @@ import 'package:multi_vendor_01/firebase_options.dart';
 import 'package:multi_vendor_01/views/auth/customer_login_screen.dart';
 import 'package:multi_vendor_01/views/auth/landing_customer_screen.dart';
 import 'package:multi_vendor_01/views/auth/landing_seller_screen.dart';
+import 'package:multi_vendor_01/views/auth/seller_login_screen.dart';
 import 'package:multi_vendor_01/views/cart_screen.dart';
 import 'package:multi_vendor_01/views/customer_home_screen.dart';
 import 'package:multi_vendor_01/views/home_screen.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
             const LandingCustomerScreen(),
         LandingSellerScreen.routeName: (context) => const LandingSellerScreen(),
         CustomerLoginScreen.routeName: (context) => const CustomerLoginScreen(),
+        SellerLoginScreen.routeName: (context) => const SellerLoginScreen(),
         HomeScreen.routeName: (context) => const HomeScreen(),
         CustomerHomeScreen.routeName: (context) => const CustomerHomeScreen(),
         ProfileScreen.routeName: (context) => const ProfileScreen(),

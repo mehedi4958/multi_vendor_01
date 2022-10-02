@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:multi_vendor_01/controllers/auth_controller.dart';
 import 'package:multi_vendor_01/controllers/snack_bar_controller.dart';
 import 'package:multi_vendor_01/views/auth/landing_customer_screen.dart';
+import 'package:multi_vendor_01/views/auth/landing_seller_screen.dart';
 import 'package:multi_vendor_01/views/customer_home_screen.dart';
 
 class CustomerLoginScreen extends StatefulWidget {
@@ -147,12 +148,8 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    const LandingCustomerScreen(),
-                              ),
-                            );
+                            Navigator.pushNamed(
+                                context, LandingCustomerScreen.routeName);
                           },
                           child: const Text('Sign up'),
                         )
@@ -176,7 +173,10 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, LandingSellerScreen.routeName);
+                          },
                           child: const Text('Sign up'),
                         )
                       ],
