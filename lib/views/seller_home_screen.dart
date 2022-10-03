@@ -4,6 +4,7 @@ import 'package:multi_vendor_01/views/category_screen.dart';
 import 'package:multi_vendor_01/views/dashboard_screen.dart';
 import 'package:multi_vendor_01/views/home_screen.dart';
 import 'package:multi_vendor_01/views/profile_screen.dart';
+import 'package:multi_vendor_01/views/upload_product_screen.dart';
 
 class SellerHomeScreen extends StatefulWidget {
   static const String routeName = 'SellerHomeScreen';
@@ -21,9 +22,7 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
     const CategoryScreen(),
     const Center(child: Text('Shop Screen')),
     const DashboardScreen(),
-    const Center(
-      child: Text('Upload'),
-    ),
+    const UploadProductScreen(),
   ];
 
   @override
