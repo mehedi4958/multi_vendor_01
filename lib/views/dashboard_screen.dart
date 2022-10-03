@@ -1,8 +1,31 @@
 import 'package:flutter/material.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
   static const String routeName = 'DashboardScreen';
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  List<String> title = [
+    'My Store',
+    'Orders',
+    'Edit Profile',
+    'Manage Products',
+    'Balance',
+    'Statistics',
+  ];
+
+  List<IconData> icons = [
+    Icons.store,
+    Icons.shop_2_outlined,
+    Icons.edit,
+    Icons.settings,
+    Icons.attach_money,
+    Icons.show_chart,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +46,11 @@ class DashboardScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(8.0),
         child: GridView.count(
           crossAxisCount: 2,
-          mainAxisSpacing: 40,
-          crossAxisSpacing: 40,
+          mainAxisSpacing: 30,
+          crossAxisSpacing: 30,
           children: List.generate(
             6,
             (index) => Card(
@@ -35,17 +58,18 @@ class DashboardScreen extends StatelessWidget {
               color: Colors.blueGrey.withOpacity(0.8),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
+                children: [
                   Icon(
-                    Icons.store,
+                    icons[index],
                     size: 50,
                     color: Colors.cyan,
                   ),
                   Text(
-                    'My Store',
-                    style: TextStyle(
-                      fontSize: 23,
+                    title[index],
+                    style: const TextStyle(
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                 ],
