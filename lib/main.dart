@@ -8,6 +8,7 @@ import 'package:multi_vendor_01/views/auth/landing_seller_screen.dart';
 import 'package:multi_vendor_01/views/auth/seller_login_screen.dart';
 import 'package:multi_vendor_01/views/cart_screen.dart';
 import 'package:multi_vendor_01/views/customer_home_screen.dart';
+import 'package:multi_vendor_01/views/dashboard_screen.dart';
 import 'package:multi_vendor_01/views/home_screen.dart';
 import 'package:multi_vendor_01/views/inner_screens/search_screens.dart';
 import 'package:multi_vendor_01/views/profile_screen.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.cyan,
         fontFamily: 'Brand-Bold',
       ),
-      initialRoute: LandingCustomerScreen.routeName,
+      initialRoute: SellerHomeScreen.routeName,
       routes: {
         LandingCustomerScreen.routeName: (context) =>
             const LandingCustomerScreen(),
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         ProfileScreen.routeName: (context) => const ProfileScreen(),
         CartScreen.routeName: (context) => const CartScreen(),
         SearchScreen.routeName: (context) => const SearchScreen(),
+        DashboardScreen.routeName: (context) => const DashboardScreen(),
       },
     );
   }
