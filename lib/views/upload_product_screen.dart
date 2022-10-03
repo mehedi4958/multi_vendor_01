@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_vendor_01/controllers/snack_bar_controller.dart';
+import 'package:multi_vendor_01/utilities/category_list.dart';
 
 class UploadProductScreen extends StatefulWidget {
   const UploadProductScreen({Key? key}) : super(key: key);
@@ -16,7 +17,11 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
 
   final ImagePicker _picker = ImagePicker();
 
-  String mainCategory = 'Men';
+  String mainCategoryValue = 'Select main category';
+  String subCategoryValue = 'subcategory';
+
+  List<String> subCategoryList = [];
+
   late double price;
   late int quantity;
   late String productName;
@@ -64,6 +69,32 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
     }
   }
 
+  void selectMainCategory(String? value) {
+    if (value == 'Men') {
+      subCategoryList = men;
+    } else if (value == 'Women') {
+      subCategoryList = women;
+    } else if (value == 'Accessories') {
+      subCategoryList = accessories;
+    } else if (value == 'Electronics') {
+      subCategoryList = electronics;
+    } else if (value == 'Shoes') {
+      subCategoryList = shoes;
+    } else if (value == 'Home & Garden') {
+      subCategoryList = homeAndGarden;
+    } else if (value == 'Beauty') {
+      subCategoryList = beauty;
+    } else if (value == 'Kids') {
+      subCategoryList = kids;
+    } else if (value == 'Bags') {
+      subCategoryList = bags;
+    }
+    setState(() {
+      mainCategoryValue = value!;
+      subCategoryValue = 'subcategory';
+    });
+  }
+
   void uploadProduct() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -108,40 +139,53 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                               ),
                       ),
                     ),
-                    Column(
-                      children: [
-                        Text('Select main category'),
-                        DropdownButton(
-                          value: mainCategory,
-                          items: const [
-                            DropdownMenuItem(
-                              value: 'Men',
-                              child: Text('Men'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Women',
-                              child: Text('Women'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Kids',
-                              child: Text('Kids'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Shoes',
-                              child: Text('Shoes'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Bags',
-                              child: Text('Bags'),
-                            ),
-                          ],
-                          onChanged: (String? value) {
-                            setState(() {
-                              mainCategory = value!;
-                            });
-                          },
-                        ),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text('Select main category'),
+                          DropdownButton(
+                            borderRadius: BorderRadius.circular(50),
+                            style: const TextStyle(
+                                color: Colors.cyan,
+                                fontWeight: FontWeight.bold),
+                            value: mainCategoryValue,
+                            items: mainCategory
+                                .map<DropdownMenuItem<String>>(
+                                  (element) => DropdownMenuItem(
+                                    value: element,
+                                    child: Text(element),
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (String? value) {
+                              selectMainCategory(value);
+                            },
+                          ),
+                          const Text('Select sub-category'),
+                          DropdownButton(
+                            borderRadius: BorderRadius.circular(50),
+                            style: const TextStyle(
+                                color: Colors.cyan,
+                                fontWeight: FontWeight.w500),
+                            value: subCategoryValue,
+                            items: subCategoryList
+                                .map<DropdownMenuItem<String>>(
+                                  (element) => DropdownMenuItem(
+                                    value: element,
+                                    child: Text(element),
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (String? value) {
+                              setState(() {
+                                subCategoryValue = value!;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

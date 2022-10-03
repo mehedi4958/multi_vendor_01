@@ -25,7 +25,7 @@ class MenCategoryScreen extends StatelessWidget {
             crossAxisSpacing: 15,
             mainAxisSpacing: 70,
             children: List.generate(
-              men.length,
+              men.length - 2,
               (index) => Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
@@ -49,7 +49,7 @@ class MenCategoryScreen extends StatelessWidget {
                         width: 50,
                         child: Image.asset('assets/images/men/men$index.jpg'),
                       ),
-                      Text(men[index]),
+                      Text(men[index + 1]),
                     ],
                   ),
                 ),
