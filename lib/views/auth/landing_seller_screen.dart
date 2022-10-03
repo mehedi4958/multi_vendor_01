@@ -58,6 +58,9 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
   }
 
   void signUp() async {
+    setState(() {
+      isLoading = true;
+    });
     try {
       if (_image != null) {
         if (_formKey.currentState!.validate()) {
@@ -73,15 +76,32 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
             'email': email,
             'address': '',
             'imageUrl': imageUrl,
+          }).whenComplete(() {
+            setState(() {
+              isLoading = false;
+            });
+          });
+          _formKey.currentState!.reset();
+          setState(() {
+            _image = null;
           });
         } else {
-          return snackBar(context, 'Fields must not be empty');
+          setState(() {
+            isLoading = false;
+          });
+          snackBar(context, 'Fields must not be empty');
         }
       } else {
-        return snackBar(context, 'Please, pick an image');
+        setState(() {
+          isLoading = false;
+        });
+        snackBar(context, 'Please, pick an image');
       }
-    } catch (exception) {
-      snackBar(context, '$exception');
+    } on FirebaseAuthException catch (exception) {
+      setState(() {
+        isLoading = false;
+      });
+      snackBar(context, exception.code);
     }
   }
 
