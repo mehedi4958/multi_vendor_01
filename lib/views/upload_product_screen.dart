@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:multi_vendor_01/controllers/snack_bar_controller.dart';
 
 class UploadProductScreen extends StatefulWidget {
@@ -10,6 +13,37 @@ class UploadProductScreen extends StatefulWidget {
 
 class _UploadProductScreenState extends State<UploadProductScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final ImagePicker _picker = ImagePicker();
+
+  late double price;
+  late int quantity;
+  late String productName;
+  late String productDescription;
+  List<XFile>? imageList = [];
+
+  void pickProductImage() async {
+    try {
+      final pickedImage = await _picker.pickMultiImage(
+        maxHeight: 300,
+        maxWidth: 300,
+        imageQuality: 100,
+      );
+      setState(() {
+        imageList = pickedImage!;
+      });
+    } catch (exception) {}
+  }
+
+  Widget displayImage() {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: imageList!.length,
+      itemBuilder: (context, index) {
+        return Image.file(File(imageList![index].path));
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +61,15 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                       height: MediaQuery.of(context).size.height * 0.3,
                       width: MediaQuery.of(context).size.width * 0.5,
                       color: Colors.cyan,
-                      child: const Center(
-                        child: Text(
-                          'You have not\n\nPicked any Image',
-                          style: TextStyle(
-                            fontSize: 17,
-                          ),
-                        ),
+                      child: Center(
+                        child: imageList != null
+                            ? displayImage()
+                            : const Text(
+                                'You have not\n\nPicked any Image',
+                                style: TextStyle(
+                                  fontSize: 17,
+                                ),
+                              ),
                       ),
                     ),
                     const Text('Category Here'),
@@ -51,6 +87,9 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.38,
                     child: TextFormField(
+                      onChanged: (value) {
+                        price = double.parse(value);
+                      },
                       keyboardType:
                           const TextInputType.numberWithOptions(decimal: true),
                       validator: (value) {
@@ -75,6 +114,9 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.45,
                     child: TextFormField(
+                      onChanged: (value) {
+                        quantity = int.parse(value);
+                      },
                       keyboardType: TextInputType.number,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -98,6 +140,9 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 1.0,
                     child: TextFormField(
+                      onChanged: (value) {
+                        productName = value;
+                      },
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Product name must not be empty';
@@ -122,6 +167,9 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 1.0,
                     child: TextFormField(
+                      onChanged: (value) {
+                        productDescription = value;
+                      },
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Product description must not be empty';
@@ -152,14 +200,16 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                pickProductImage();
+              },
               child: const Icon(Icons.photo_library),
             ),
           ),
           FloatingActionButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                print('Cool');
+                print('$price\n$quantity\n$productName\n$productDescription');
               } else {
                 snackBar(context, 'Fields must not be empty');
               }
