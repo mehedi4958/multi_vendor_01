@@ -93,6 +93,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 1.0,
                   child: TextFormField(
+                    maxLength: 800,
                     maxLines: 5,
                     decoration: InputDecoration(
                       labelText: 'Product Description',
@@ -107,6 +108,22 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: FloatingActionButton(
+              onPressed: () {},
+              child: const Icon(Icons.photo_library),
+            ),
+          ),
+          FloatingActionButton(
+            onPressed: () {},
+            child: const Icon(Icons.upload),
+          ),
+        ],
       ),
     );
   }
