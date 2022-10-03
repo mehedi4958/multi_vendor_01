@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:multi_vendor_01/controllers/snack_bar_controller.dart';
 import 'package:multi_vendor_01/views/auth/landing_customer_screen.dart';
 import 'package:multi_vendor_01/views/auth/landing_seller_screen.dart';
+import 'package:multi_vendor_01/views/seller_home_screen.dart';
 
 class SellerLoginScreen extends StatefulWidget {
   static const String routeName = 'SellerLoginScreen';
@@ -36,6 +37,8 @@ class _SellerLoginScreenState extends State<SellerLoginScreen> {
             isLoading = false;
           });
         });
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            SellerHomeScreen.routeName, (route) => false);
       } else {
         setState(() {
           isLoading = false;

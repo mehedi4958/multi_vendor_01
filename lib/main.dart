@@ -11,6 +11,7 @@ import 'package:multi_vendor_01/views/customer_home_screen.dart';
 import 'package:multi_vendor_01/views/home_screen.dart';
 import 'package:multi_vendor_01/views/inner_screens/search_screens.dart';
 import 'package:multi_vendor_01/views/profile_screen.dart';
+import 'package:multi_vendor_01/views/seller_home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         SellerLoginScreen.routeName: (context) => const SellerLoginScreen(),
         HomeScreen.routeName: (context) => const HomeScreen(),
         CustomerHomeScreen.routeName: (context) => const CustomerHomeScreen(),
+        SellerHomeScreen.routeName: (context) => const SellerHomeScreen(),
         ProfileScreen.routeName: (context) => const ProfileScreen(),
         CartScreen.routeName: (context) => const CartScreen(),
         SearchScreen.routeName: (context) => const SearchScreen(),

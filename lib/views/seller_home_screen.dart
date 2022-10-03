@@ -4,23 +4,27 @@ import 'package:multi_vendor_01/views/category_screen.dart';
 import 'package:multi_vendor_01/views/home_screen.dart';
 import 'package:multi_vendor_01/views/profile_screen.dart';
 
-class CustomerHomeScreen extends StatefulWidget {
-  static const String routeName = 'CustomerHomeScreen';
-  const CustomerHomeScreen({Key? key}) : super(key: key);
+class SellerHomeScreen extends StatefulWidget {
+  static const String routeName = 'SellerHomeScreen';
+  const SellerHomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<CustomerHomeScreen> createState() => _CustomerHomeScreenState();
+  State<SellerHomeScreen> createState() => _SellerHomeScreenState();
 }
 
-class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
+class _SellerHomeScreenState extends State<SellerHomeScreen> {
   int _selectedItem = 0;
 
   final _pages = <Widget>[
     const HomeScreen(),
     const CategoryScreen(),
     const Center(child: Text('Shop Screen')),
-    const CartScreen(),
-    const ProfileScreen(),
+    const Center(
+      child: Text('Dashboard'),
+    ),
+    const Center(
+      child: Text('Upload'),
+    ),
   ];
 
   @override
@@ -50,12 +54,12 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
             label: 'Shop',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Cart',
+            icon: Icon(Icons.dashboard),
+            label: 'Dashboard',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.upload),
+            label: 'Upload',
           ),
         ],
       ),
