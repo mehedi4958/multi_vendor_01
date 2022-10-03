@@ -36,13 +36,37 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
   }
 
   Widget displayImage() {
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: imageList!.length,
-      itemBuilder: (context, index) {
-        return Image.file(File(imageList![index].path));
+    return InkWell(
+      onTap: () {
+        setState(() {
+          imageList = null;
+        });
       },
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: imageList!.length,
+        itemBuilder: (context, index) {
+          return Image.file(File(imageList![index].path));
+        },
+      ),
     );
+  }
+
+  void uploadProduct() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      if (imageList!.isNotEmpty) {
+        print('$price\n$quantity\n$productName\n$productDescription');
+        setState(() {
+          imageList = [];
+        });
+        _formKey.currentState!.reset();
+      } else {
+        snackBar(context, 'Please, pick product image');
+      }
+    } else {
+      snackBar(context, 'Fields must not be empty');
+    }
   }
 
   @override
@@ -87,8 +111,8 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.38,
                     child: TextFormField(
-                      onChanged: (value) {
-                        price = double.parse(value);
+                      onSaved: (value) {
+                        price = double.parse(value!);
                       },
                       keyboardType:
                           const TextInputType.numberWithOptions(decimal: true),
@@ -114,8 +138,8 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.45,
                     child: TextFormField(
-                      onChanged: (value) {
-                        quantity = int.parse(value);
+                      onSaved: (value) {
+                        quantity = int.parse(value!);
                       },
                       keyboardType: TextInputType.number,
                       validator: (value) {
@@ -140,8 +164,8 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 1.0,
                     child: TextFormField(
-                      onChanged: (value) {
-                        productName = value;
+                      onSaved: (value) {
+                        productName = value!;
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -167,8 +191,8 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 1.0,
                     child: TextFormField(
-                      onChanged: (value) {
-                        productDescription = value;
+                      onSaved: (value) {
+                        productDescription = value!;
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -208,11 +232,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
           ),
           FloatingActionButton(
             onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                print('$price\n$quantity\n$productName\n$productDescription');
-              } else {
-                snackBar(context, 'Fields must not be empty');
-              }
+              uploadProduct();
             },
             child: const Icon(Icons.upload),
           ),
