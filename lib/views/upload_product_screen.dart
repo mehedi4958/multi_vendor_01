@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart' as path;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_vendor_01/controllers/snack_bar_controller.dart';
@@ -15,6 +17,8 @@ class UploadProductScreen extends StatefulWidget {
 class _UploadProductScreenState extends State<UploadProductScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
+
   final ImagePicker _picker = ImagePicker();
 
   String mainCategoryValue = 'Select main category';
@@ -27,6 +31,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
   late String productName;
   late String productDescription;
   List<XFile>? imageList = [];
+  List<String> imageUrlList = [];
 
   void pickProductImage() async {
     try {
@@ -95,20 +100,38 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
     });
   }
 
-  void uploadProduct() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      if (imageList!.isNotEmpty) {
-        print('$price\n$quantity\n$productName\n$productDescription');
-        setState(() {
-          imageList = [];
-        });
-        _formKey.currentState!.reset();
+  void uploadProduct() async {
+    if (mainCategoryValue != 'Select main category' &&
+        subCategoryValue != 'subcategory') {
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+        if (imageList!.isNotEmpty) {
+          try {
+            for (var image in imageList!) {
+              Reference reference =
+                  _firebaseStorage.ref('products/${path.basename}');
+              await reference.putFile(File(image.path)).whenComplete(() async {
+                await reference.getDownloadURL().then((value) {
+                  imageUrlList.add(value);
+                });
+              });
+            }
+          } catch (exception) {
+            print(exception);
+          }
+          print('$price\n$quantity\n$productName\n$productDescription');
+          setState(() {
+            imageList = [];
+          });
+          _formKey.currentState!.reset();
+        } else {
+          snackBar(context, 'Please, pick product image');
+        }
       } else {
-        snackBar(context, 'Please, pick product image');
+        snackBar(context, 'Fields must not be empty');
       }
     } else {
-      snackBar(context, 'Fields must not be empty');
+      snackBar(context, 'Please, select a category');
     }
   }
 
