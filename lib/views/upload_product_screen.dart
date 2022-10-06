@@ -109,7 +109,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
           try {
             for (var image in imageList!) {
               Reference reference =
-                  _firebaseStorage.ref('products/${path.basename}');
+                  _firebaseStorage.ref('products/${path.basename(image.path)}');
               await reference.putFile(File(image.path)).whenComplete(() async {
                 await reference.getDownloadURL().then((value) {
                   imageUrlList.add(value);
