@@ -155,6 +155,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
           imageList = [];
           subCategoryList = [];
           mainCategoryValue = 'Select main category';
+          imageUrlList = [];
         });
         _formKey.currentState!.reset();
       });
