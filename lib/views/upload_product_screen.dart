@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as path;
 import 'package:flutter/material.dart';
@@ -18,6 +20,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   final ImagePicker _picker = ImagePicker();
 
@@ -100,7 +103,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
     });
   }
 
-  void uploadProduct() async {
+  Future<void> uploadImages() async {
     if (mainCategoryValue != 'Select main category' &&
         subCategoryValue != 'subcategory') {
       if (_formKey.currentState!.validate()) {
@@ -119,11 +122,6 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
           } catch (exception) {
             print(exception);
           }
-          print('$price\n$quantity\n$productName\n$productDescription');
-          setState(() {
-            imageList = [];
-          });
-          _formKey.currentState!.reset();
         } else {
           snackBar(context, 'Please, pick product image');
         }
@@ -133,6 +131,36 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
     } else {
       snackBar(context, 'Please, select a category');
     }
+  }
+
+  void uploadProductData() async {
+    if (imageUrlList.isNotEmpty) {
+      CollectionReference productRef = _firestore.collection('products');
+      await productRef.doc().set({
+        'mainCategory': mainCategoryValue,
+        'subCategory': subCategoryValue,
+        'price': price,
+        'inStock': quantity,
+        'productName': productName,
+        'productDescription': productDescription,
+        'sellerUid': FirebaseAuth.instance.currentUser!.uid,
+        'productImages': imageUrlList,
+        'discount': 0,
+      }).whenComplete(() {
+        setState(() {
+          imageList = [];
+          subCategoryList = [];
+          mainCategoryValue = 'Select main category';
+        });
+        _formKey.currentState!.reset();
+      });
+    }
+  }
+
+  void uploadProduct() async {
+    await uploadImages().whenComplete(() {
+      uploadProductData();
+    });
   }
 
   @override
