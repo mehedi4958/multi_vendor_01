@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multi_vendor_01/views/gallery/electronics_gallery_screen.dart';
 import 'package:multi_vendor_01/views/gallery/men_gallery_screen.dart';
+import 'package:multi_vendor_01/views/gallery/shoes_gallery_screen.dart';
 import 'package:multi_vendor_01/views/gallery/women_gallery_screen.dart';
 import 'package:multi_vendor_01/views/inner_screens/search_screens.dart';
 
@@ -84,11 +85,7 @@ class HomeScreen extends StatelessWidget {
             MenGalleryScreen(),
             WomenGalleryScreen(),
             ElectronicsGalleryScreen(),
-            Center(
-              child: Text(
-                'Shoes Category',
-              ),
-            ),
+            ShoesGalleryScreen(),
           ],
         ),
       ),

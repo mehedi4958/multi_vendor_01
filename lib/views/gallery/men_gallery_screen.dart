@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
+import '../widgets/product_model.dart';
+
 class MenGalleryScreen extends StatefulWidget {
   const MenGalleryScreen({Key? key}) : super(key: key);
 
@@ -52,57 +54,7 @@ class _MenGalleryScreenState extends State<MenGalleryScreen> {
               itemCount: snapshot.data!.docs.length,
               crossAxisCount: 2,
               itemBuilder: (context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(
-                        15,
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                          ),
-                          child: Container(
-                            constraints: const BoxConstraints(
-                              minHeight: 100,
-                              maxHeight: 250,
-                            ),
-                            child: Image.network(
-                                snapshot.data!.docs[index]['productImages'][0]),
-                          ),
-                        ),
-                        Text(snapshot.data!.docs[index]['productName']),
-                        Padding(
-                          padding: const EdgeInsets.all(14.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                snapshot.data!.docs[index]['price'].toString(),
-                                style: const TextStyle(
-                                  color: Colors.cyan,
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.favorite_border_outlined,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                );
+                return ProductModel(products: snapshot.data!.docs[index]);
               },
               staggeredTileBuilder: (context) => const StaggeredTile.fit(1)),
         );
