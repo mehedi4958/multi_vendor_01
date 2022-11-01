@@ -11,8 +11,10 @@ class MenGalleryScreen extends StatefulWidget {
 }
 
 class _MenGalleryScreenState extends State<MenGalleryScreen> {
-  final Stream<QuerySnapshot> _productsStream =
-      FirebaseFirestore.instance.collection('products').snapshots();
+  final Stream<QuerySnapshot> _productsStream = FirebaseFirestore.instance
+      .collection('products')
+      .where('mainCategory', isEqualTo: 'Men')
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,19 @@ class _MenGalleryScreenState extends State<MenGalleryScreen> {
           return const Center(
             child: CircularProgressIndicator(
               color: Colors.cyan,
+            ),
+          );
+        }
+
+        if (snapshot.data!.docs.isEmpty) {
+          return const Center(
+            child: Text(
+              'This Category \n\nhas no item yet',
+              style: TextStyle(
+                color: Colors.black87,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           );
         }
