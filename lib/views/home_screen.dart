@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_vendor_01/views/gallery/electronics_gallery_screen.dart';
 import 'package:multi_vendor_01/views/gallery/men_gallery_screen.dart';
 import 'package:multi_vendor_01/views/gallery/women_gallery_screen.dart';
 import 'package:multi_vendor_01/views/inner_screens/search_screens.dart';
@@ -73,7 +74,7 @@ class HomeScreen extends StatelessWidget {
             tabs: [
               RepeatedTab(title: 'Men'),
               RepeatedTab(title: 'Women'),
-              RepeatedTab(title: 'Kids'),
+              RepeatedTab(title: 'Electronics'),
               RepeatedTab(title: 'Shoes'),
             ],
           ),
@@ -82,11 +83,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             MenGalleryScreen(),
             WomenGalleryScreen(),
-            Center(
-              child: Text(
-                'Kids Category',
-              ),
-            ),
+            ElectronicsGalleryScreen(),
             Center(
               child: Text(
                 'Shoes Category',
