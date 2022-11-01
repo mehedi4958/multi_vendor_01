@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multi_vendor_01/views/gallery/men_gallery_screen.dart';
+import 'package:multi_vendor_01/views/gallery/women_gallery_screen.dart';
 import 'package:multi_vendor_01/views/inner_screens/search_screens.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -80,11 +81,7 @@ class HomeScreen extends StatelessWidget {
         body: const TabBarView(
           children: [
             MenGalleryScreen(),
-            Center(
-              child: Text(
-                'Women Category',
-              ),
-            ),
+            WomenGalleryScreen(),
             Center(
               child: Text(
                 'Kids Category',
