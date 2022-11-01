@@ -106,18 +106,6 @@ class _MenGalleryScreenState extends State<MenGalleryScreen> {
               },
               staggeredTileBuilder: (context) => const StaggeredTile.fit(1)),
         );
-        //   ListView(
-        //   children: snapshot.data!.docs
-        //       .map((DocumentSnapshot document) {
-        //         Map<String, dynamic> data =
-        //             document.data()! as Map<String, dynamic>;
-        //         return ListTile(
-        //           title: Text(data['productName']),
-        //         );
-        //       })
-        //       .toList()
-        //       .cast(),
-        // );
       },
     );
   }
