@@ -27,6 +27,58 @@ class ProductDetailScreen extends StatelessWidget {
               ),
             ),
           ),
+          Text(
+            productList['productName'],
+            style: TextStyle(
+              fontSize: 19,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 4,
+              color: Colors.grey.shade600,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    const Text(
+                      'USD',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.cyan,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      productList['price'].toString(),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: Colors.cyan,
+                      ),
+                    ),
+                  ],
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.favorite_border_outlined,
+                    color: Colors.red,
+                    size: 30,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Text(
+            '${productList['inStock']} pieces available in stock',
+            style: const TextStyle(
+              color: Colors.grey,
+            ),
+          )
         ],
       ),
     );
