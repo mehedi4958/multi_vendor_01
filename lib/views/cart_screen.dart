@@ -94,7 +94,7 @@ class CartScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

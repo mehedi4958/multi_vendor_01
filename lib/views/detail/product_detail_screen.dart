@@ -17,7 +17,7 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<dynamic> images = productList['productImages'];
-    final Stream<QuerySnapshot> _productsStream = FirebaseFirestore.instance
+    final Stream<QuerySnapshot> productsStream = FirebaseFirestore.instance
         .collection('products')
         .where('mainCategory', isEqualTo: 'Men')
         .snapshots();
@@ -160,7 +160,7 @@ class ProductDetailScreen extends StatelessWidget {
             ),
             SizedBox(
               child: StreamBuilder<QuerySnapshot>(
-                stream: _productsStream,
+                stream: productsStream,
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {
@@ -201,6 +201,40 @@ class ProductDetailScreen extends StatelessWidget {
                             const StaggeredTile.fit(1)),
                   );
                 },
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.store),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.shopping_cart),
+            ),
+            Container(
+              height: 35,
+              width: MediaQuery.of(context).size.width * 0.45,
+              decoration: BoxDecoration(
+                color: Colors.black87,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: MaterialButton(
+                onPressed: () {},
+                child: const Text(
+                  'Add To Cart',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
           ],
