@@ -4,6 +4,7 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
+import '../widgets/full_image_screen.dart';
 import '../widgets/product_model.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -26,17 +27,43 @@ class ProductDetailScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.45,
-              child: Swiper(
-                itemBuilder: (context, index) {
-                  return Image.network(images[index]);
-                },
-                itemCount: images.length,
-                pagination: const SwiperPagination(
-                  builder: SwiperPagination.dots,
+            Stack(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return FullImageScreen(
+                          imageList: images,
+                        );
+                      }),
+                    );
+                  },
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.45,
+                    child: Swiper(
+                      itemBuilder: (context, index) {
+                        return Image.network(images[index]);
+                      },
+                      itemCount: images.length,
+                      pagination: const SwiperPagination(
+                        builder: SwiperPagination.dots,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                Positioned(
+                  top: 20,
+                  left: 10,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios),
+                  ),
+                ),
+              ],
             ),
             Text(
               productList['productName'],
