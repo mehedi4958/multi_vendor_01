@@ -9,6 +9,9 @@ class FullImageScreen extends StatefulWidget {
 }
 
 class _FullImageScreenState extends State<FullImageScreen> {
+  final PageController _pageController = PageController();
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,21 +22,43 @@ class _FullImageScreenState extends State<FullImageScreen> {
       ),
       body: Column(
         children: [
-          const Center(
+          Center(
             child: Text(
-              '1/5',
-              style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
+              '${index + 1}/${widget.imageList.length}',
+              style: const TextStyle(
+                fontSize: 27,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.5,
             child: PageView(
+              controller: _pageController,
+              onPageChanged: (value) {
+                setState(() {
+                  index = value;
+                });
+              },
               children: List.generate(
                 widget.imageList.length,
                 (index) => Image.network(widget.imageList[index].toString()),
               ),
             ),
-          )
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.2,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.imageList.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                      onTap: () {
+                        _pageController.jumpToPage(index);
+                      },
+                      child: Image.network(widget.imageList[index]));
+                }),
+          ),
         ],
       ),
     );
