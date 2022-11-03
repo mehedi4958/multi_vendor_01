@@ -48,16 +48,14 @@ class _MenGalleryScreenState extends State<MenGalleryScreen> {
           );
         }
 
-        return SingleChildScrollView(
-          child: StaggeredGridView.countBuilder(
-              shrinkWrap: true,
-              itemCount: snapshot.data!.docs.length,
-              crossAxisCount: 2,
-              itemBuilder: (context, int index) {
-                return ProductModel(products: snapshot.data!.docs[index]);
-              },
-              staggeredTileBuilder: (context) => const StaggeredTile.fit(1)),
-        );
+        return StaggeredGridView.countBuilder(
+            shrinkWrap: true,
+            itemCount: snapshot.data!.docs.length,
+            crossAxisCount: 2,
+            itemBuilder: (context, int index) {
+              return ProductModel(products: snapshot.data!.docs[index]);
+            },
+            staggeredTileBuilder: (context) => const StaggeredTile.fit(1));
       },
     );
   }
