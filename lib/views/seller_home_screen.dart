@@ -19,7 +19,7 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
   final _pages = <Widget>[
     const HomeScreen(),
     const CategoryScreen(),
-    StoreScreen(),
+    const StoreScreen(),
     const DashboardScreen(),
     const UploadProductScreen(),
   ];

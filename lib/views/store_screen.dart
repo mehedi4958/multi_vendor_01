@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_vendor_01/views/minor_screens/visit_store_screen.dart';
 
 class StoreScreen extends StatelessWidget {
-  // StoreScreen({Key? key}) : super(key: key);
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  const StoreScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -28,25 +29,40 @@ class StoreScreen extends StatelessWidget {
                   mainAxisSpacing: 25,
                 ),
                 itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      SizedBox(
-                        height: 120,
-                        width: 120,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.network(
-                              snapshot.data!.docs[index]['imageUrl']),
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return VisitStoreScreen(
+                              sellerUid: snapshot.data!.docs[index]['sid'],
+                            );
+                          },
                         ),
-                      ),
-                      Text(
-                        snapshot.data!.docs[index]['storeName'],
-                        style: const TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.bold,
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 120,
+                          width: 120,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.network(
+                              snapshot.data!.docs[index]['imageUrl'],
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                        Text(
+                          snapshot.data!.docs[index]['storeName'],
+                          style: const TextStyle(
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 },
               );
