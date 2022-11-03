@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../widgets/product_model.dart';
 
@@ -92,6 +93,13 @@ class VisitStoreScreen extends StatelessWidget {
                     staggeredTileBuilder: (context) =>
                         const StaggeredTile.fit(1));
               },
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {},
+              child: const Icon(
+                FontAwesomeIcons.whatsapp,
+                color: Colors.white,
+              ),
             ),
           );
         }
