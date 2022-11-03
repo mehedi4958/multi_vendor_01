@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:multi_vendor_01/views/cart_screen.dart';
 import 'package:multi_vendor_01/views/category_screen.dart';
 import 'package:multi_vendor_01/views/dashboard_screen.dart';
 import 'package:multi_vendor_01/views/home_screen.dart';
-import 'package:multi_vendor_01/views/profile_screen.dart';
+import 'package:multi_vendor_01/views/store_screen.dart';
 import 'package:multi_vendor_01/views/upload_product_screen.dart';
 
 class SellerHomeScreen extends StatefulWidget {
@@ -20,7 +19,7 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
   final _pages = <Widget>[
     const HomeScreen(),
     const CategoryScreen(),
-    const Center(child: Text('Shop Screen')),
+    StoreScreen(),
     const DashboardScreen(),
     const UploadProductScreen(),
   ];

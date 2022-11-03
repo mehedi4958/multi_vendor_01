@@ -49,15 +49,17 @@ class _FullImageScreenState extends State<FullImageScreen> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.2,
             child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: widget.imageList.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                      onTap: () {
-                        _pageController.jumpToPage(index);
-                      },
-                      child: Image.network(widget.imageList[index]));
-                }),
+              scrollDirection: Axis.horizontal,
+              itemCount: widget.imageList.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    _pageController.jumpToPage(index);
+                  },
+                  child: Image.network(widget.imageList[index]),
+                );
+              },
+            ),
           ),
         ],
       ),
