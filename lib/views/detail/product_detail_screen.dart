@@ -19,7 +19,8 @@ class ProductDetailScreen extends StatelessWidget {
     final List<dynamic> images = productList['productImages'];
     final Stream<QuerySnapshot> productsStream = FirebaseFirestore.instance
         .collection('products')
-        .where('mainCategory', isEqualTo: 'Men')
+        .where('mainCategory', isEqualTo: productList['mainCategory'])
+        .where('subCategory', isEqualTo: productList['subCategory'])
         .snapshots();
     return Scaffold(
       body: SingleChildScrollView(
