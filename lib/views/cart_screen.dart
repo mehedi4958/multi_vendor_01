@@ -169,9 +169,9 @@ class CartScreen extends StatelessWidget {
                 letterSpacing: 1,
               ),
             ),
-            const Text(
-              '00.00',
-              style: TextStyle(
+            Text(
+              Provider.of<CartProvider>(context).totalPrice.toStringAsFixed(2),
+              style: const TextStyle(
                 color: Colors.red,
                 fontSize: 17,
                 letterSpacing: 3,
