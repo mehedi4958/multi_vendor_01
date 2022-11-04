@@ -4,7 +4,7 @@ class Product {
   int quantity;
   int inStock;
   List imageUrls;
-  String documentId;
+  String productId;
   String sellerUid;
 
   Product({
@@ -13,7 +13,7 @@ class Product {
     required this.quantity,
     required this.inStock,
     required this.imageUrls,
-    required this.documentId,
+    required this.productId,
     required this.sellerUid,
   });
 }

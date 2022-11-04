@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:multi_vendor_01/provider/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class CartScreen extends StatelessWidget {
   static const String routeName = 'CartScreen';
@@ -28,35 +30,45 @@ class CartScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Your cart is empty',
-              style: TextStyle(
-                fontSize: 30,
-                color: Colors.blueGrey,
-              ),
-            ),
-            const SizedBox(height: 30),
-            Material(
-              color: Colors.cyan,
-              borderRadius: BorderRadius.circular(15),
-              child: MaterialButton(
-                minWidth: MediaQuery.of(context).size.width * 0.6,
-                onPressed: () {},
-                child: const Text(
-                  'continue shopping',
-                  style: TextStyle(
-                    fontSize: 17,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+      body: Consumer<CartProvider>(
+        builder: (context, cartProvider, child) {
+          return ListView.builder(
+            itemCount: cartProvider.count,
+            itemBuilder: (context, index) {
+              return Text(cartProvider.getItems[index].name);
+            },
+          );
+        },
       ),
+      // Center(
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: [
+      //       const Text(
+      //         'Your cart is empty',
+      //         style: TextStyle(
+      //           fontSize: 30,
+      //           color: Colors.blueGrey,
+      //         ),
+      //       ),
+      //       const SizedBox(height: 30),
+      //       Material(
+      //         color: Colors.cyan,
+      //         borderRadius: BorderRadius.circular(15),
+      //         child: MaterialButton(
+      //           minWidth: MediaQuery.of(context).size.width * 0.6,
+      //           onPressed: () {},
+      //           child: const Text(
+      //             'continue shopping',
+      //             style: TextStyle(
+      //               fontSize: 17,
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       bottomSheet: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Row(

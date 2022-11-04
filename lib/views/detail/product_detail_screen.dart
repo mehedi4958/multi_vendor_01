@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:multi_vendor_01/provider/cart_provider.dart';
 import 'package:multi_vendor_01/views/minor_screens/visit_store_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
@@ -267,7 +269,17 @@ class ProductDetailScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
               ),
               child: MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  Provider.of<CartProvider>(context, listen: false).addItem(
+                    productList['productName'],
+                    productList['price'],
+                    1,
+                    productList['inStock'],
+                    productList['productImages'],
+                    productList['productId'],
+                    productList['sellerUid'],
+                  );
+                },
                 child: const Text(
                   'Add To Cart',
                   style: TextStyle(

@@ -10,18 +10,18 @@ class CartProvider extends ChangeNotifier {
   }
 
   int? get count {
-    _list.length;
+    return _list.length;
   }
 
   void addItem(String name, double price, int quantity, int inStock,
-      List imageUrls, String documentId, String sellerUid) {
+      List imageUrls, String productId, String sellerUid) {
     final product = Product(
         name: name,
         price: price,
         quantity: quantity,
         inStock: inStock,
         imageUrls: imageUrls,
-        documentId: documentId,
+        productId: productId,
         sellerUid: sellerUid);
     _list.add(product);
     notifyListeners();
