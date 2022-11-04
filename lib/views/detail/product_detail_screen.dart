@@ -116,7 +116,9 @@ class ProductDetailScreen extends StatelessWidget {
                                       product.productId ==
                                       productList['productId']) !=
                               null
-                          ? snackBar(context, 'Item is already in the wishlist')
+                          ? context
+                              .read<WishListProvider>()
+                              .removeWished(productList['productId'])
                           : Provider.of<WishListProvider>(context,
                                   listen: false)
                               .addWishedItem(
