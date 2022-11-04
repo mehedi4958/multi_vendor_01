@@ -35,7 +35,36 @@ class CartScreen extends StatelessWidget {
           return ListView.builder(
             itemCount: cartProvider.count,
             itemBuilder: (context, index) {
-              return Text(cartProvider.getItems[index].name);
+              return Card(
+                child: SizedBox(
+                  height: 100,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        height: 100,
+                        width: 120,
+                        child: Image.network(
+                          cartProvider.getItems[index].imageUrls[0].toString(),
+                        ),
+                      ),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            Text(
+                              cartProvider.getItems[index].name,
+                              maxLines: 2,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
             },
           );
         },
