@@ -82,14 +82,21 @@ class CartScreen extends StatelessWidget {
                                   child: Row(
                                     children: [
                                       IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          cartProvider.decrement(
+                                              cartProvider.getItems[index]);
+                                        },
                                         icon: const Icon(
                                           FontAwesomeIcons.minus,
                                         ),
                                       ),
-                                      const Text('1'),
+                                      Text(cartProvider.getItems[index].quantity
+                                          .toString()),
                                       IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          cartProvider.increment(
+                                              cartProvider.getItems[index]);
+                                        },
                                         icon: const Icon(
                                           FontAwesomeIcons.plus,
                                         ),
