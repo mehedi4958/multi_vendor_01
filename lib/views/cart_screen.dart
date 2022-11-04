@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:multi_vendor_01/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -49,6 +50,8 @@ class CartScreen extends StatelessWidget {
                       ),
                       Flexible(
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
                               cartProvider.getItems[index].name,
@@ -57,6 +60,44 @@ class CartScreen extends StatelessWidget {
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  cartProvider.getItems[index].price
+                                      .toStringAsFixed(2),
+                                  style: const TextStyle(
+                                    color: Colors.cyan,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Container(
+                                  height: 35,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade200,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(
+                                          FontAwesomeIcons.minus,
+                                        ),
+                                      ),
+                                      const Text('1'),
+                                      IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(
+                                          FontAwesomeIcons.plus,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

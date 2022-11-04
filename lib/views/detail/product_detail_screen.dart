@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:multi_vendor_01/provider/cart_provider.dart';
+import 'package:multi_vendor_01/views/cart_screen.dart';
 import 'package:multi_vendor_01/views/minor_screens/visit_store_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
@@ -258,7 +259,16 @@ class ProductDetailScreen extends StatelessWidget {
               icon: const Icon(Icons.store),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return CartScreen();
+                    },
+                  ),
+                );
+              },
               icon: const Icon(Icons.shopping_cart),
             ),
             Container(

@@ -3,6 +3,7 @@ import 'package:multi_vendor_01/views/cart_screen.dart';
 import 'package:multi_vendor_01/views/category_screen.dart';
 import 'package:multi_vendor_01/views/home_screen.dart';
 import 'package:multi_vendor_01/views/profile_screen.dart';
+import 'package:multi_vendor_01/views/store_screen.dart';
 
 class CustomerHomeScreen extends StatefulWidget {
   static const String routeName = 'CustomerHomeScreen';
@@ -18,7 +19,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
   final _pages = <Widget>[
     const HomeScreen(),
     const CategoryScreen(),
-    const Center(child: Text('Shop Screen')),
+    const StoreScreen(),
     const CartScreen(),
     const ProfileScreen(),
   ];
@@ -47,7 +48,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shop),
-            label: 'Shop',
+            label: 'Store',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
