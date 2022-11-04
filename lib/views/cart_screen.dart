@@ -23,7 +23,9 @@ class CartScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.read<CartProvider>().clearCart();
+            },
             icon: const Icon(
               Icons.delete_forever,
               color: Colors.black87,
@@ -31,132 +33,141 @@ class CartScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Consumer<CartProvider>(
-        builder: (context, cartProvider, child) {
-          return ListView.builder(
-            itemCount: cartProvider.count,
-            itemBuilder: (context, index) {
-              return Card(
-                child: SizedBox(
-                  height: 100,
-                  child: Row(
-                    children: [
-                      SizedBox(
+      body: context.watch<CartProvider>().getItems.isNotEmpty
+          ? Consumer<CartProvider>(
+              builder: (context, cartProvider, child) {
+                return ListView.builder(
+                  itemCount: cartProvider.count,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: SizedBox(
                         height: 100,
-                        width: 120,
-                        child: Image.network(
-                          cartProvider.getItems[index].imageUrls[0].toString(),
-                        ),
-                      ),
-                      Flexible(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        child: Row(
                           children: [
-                            Text(
-                              cartProvider.getItems[index].name,
-                              maxLines: 2,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                            SizedBox(
+                              height: 100,
+                              width: 120,
+                              child: Image.network(
+                                cartProvider.getItems[index].imageUrls[0]
+                                    .toString(),
                               ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  cartProvider.getItems[index].price
-                                      .toStringAsFixed(2),
-                                  style: const TextStyle(
-                                    color: Colors.cyan,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    cartProvider.getItems[index].name,
+                                    maxLines: 2,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                Container(
-                                  height: 35,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey.shade200,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Row(
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      IconButton(
-                                        onPressed: cartProvider
-                                                    .getItems[index].quantity ==
-                                                1
-                                            ? null
-                                            : () {
-                                                cartProvider.decrement(
-                                                    cartProvider
-                                                        .getItems[index]);
-                                              },
-                                        icon: const Icon(
-                                          FontAwesomeIcons.minus,
+                                      Text(
+                                        cartProvider.getItems[index].price
+                                            .toStringAsFixed(2),
+                                        style: const TextStyle(
+                                          color: Colors.cyan,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      Text(cartProvider.getItems[index].quantity
-                                          .toString()),
-                                      IconButton(
-                                        onPressed: cartProvider
-                                                    .getItems[index].quantity ==
-                                                cartProvider
-                                                    .getItems[index].inStock
-                                            ? null
-                                            : () {
-                                                cartProvider.increment(
-                                                    cartProvider
-                                                        .getItems[index]);
-                                              },
-                                        icon: const Icon(
-                                          FontAwesomeIcons.plus,
+                                      Container(
+                                        height: 35,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey.shade200,
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            IconButton(
+                                              onPressed: cartProvider
+                                                          .getItems[index]
+                                                          .quantity ==
+                                                      1
+                                                  ? null
+                                                  : () {
+                                                      cartProvider.decrement(
+                                                          cartProvider
+                                                              .getItems[index]);
+                                                    },
+                                              icon: const Icon(
+                                                FontAwesomeIcons.minus,
+                                              ),
+                                            ),
+                                            Text(cartProvider
+                                                .getItems[index].quantity
+                                                .toString()),
+                                            IconButton(
+                                              onPressed: cartProvider
+                                                          .getItems[index]
+                                                          .quantity ==
+                                                      cartProvider
+                                                          .getItems[index]
+                                                          .inStock
+                                                  ? null
+                                                  : () {
+                                                      cartProvider.increment(
+                                                          cartProvider
+                                                              .getItems[index]);
+                                                    },
+                                              icon: const Icon(
+                                                FontAwesomeIcons.plus,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),
                       ),
-                    ],
+                    );
+                  },
+                );
+              },
+            )
+          : Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Your cart is empty',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.blueGrey,
+                    ),
                   ),
-                ),
-              );
-            },
-          );
-        },
-      ),
-      // Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       const Text(
-      //         'Your cart is empty',
-      //         style: TextStyle(
-      //           fontSize: 30,
-      //           color: Colors.blueGrey,
-      //         ),
-      //       ),
-      //       const SizedBox(height: 30),
-      //       Material(
-      //         color: Colors.cyan,
-      //         borderRadius: BorderRadius.circular(15),
-      //         child: MaterialButton(
-      //           minWidth: MediaQuery.of(context).size.width * 0.6,
-      //           onPressed: () {},
-      //           child: const Text(
-      //             'continue shopping',
-      //             style: TextStyle(
-      //               fontSize: 17,
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
+                  const SizedBox(height: 30),
+                  Material(
+                    color: Colors.cyan,
+                    borderRadius: BorderRadius.circular(15),
+                    child: MaterialButton(
+                      minWidth: MediaQuery.of(context).size.width * 0.6,
+                      onPressed: () {},
+                      child: const Text(
+                        'continue shopping',
+                        style: TextStyle(
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
       bottomSheet: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Row(

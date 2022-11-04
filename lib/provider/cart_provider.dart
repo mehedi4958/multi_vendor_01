@@ -44,4 +44,9 @@ class CartProvider extends ChangeNotifier {
     }
     return total;
   }
+
+  void clearCart() {
+    _list.clear();
+    notifyListeners();
+  }
 }
