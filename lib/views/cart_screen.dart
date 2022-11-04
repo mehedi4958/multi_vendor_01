@@ -82,10 +82,15 @@ class CartScreen extends StatelessWidget {
                                   child: Row(
                                     children: [
                                       IconButton(
-                                        onPressed: () {
-                                          cartProvider.decrement(
-                                              cartProvider.getItems[index]);
-                                        },
+                                        onPressed: cartProvider
+                                                    .getItems[index].quantity ==
+                                                1
+                                            ? null
+                                            : () {
+                                                cartProvider.decrement(
+                                                    cartProvider
+                                                        .getItems[index]);
+                                              },
                                         icon: const Icon(
                                           FontAwesomeIcons.minus,
                                         ),
@@ -93,10 +98,16 @@ class CartScreen extends StatelessWidget {
                                       Text(cartProvider.getItems[index].quantity
                                           .toString()),
                                       IconButton(
-                                        onPressed: () {
-                                          cartProvider.increment(
-                                              cartProvider.getItems[index]);
-                                        },
+                                        onPressed: cartProvider
+                                                    .getItems[index].quantity ==
+                                                cartProvider
+                                                    .getItems[index].inStock
+                                            ? null
+                                            : () {
+                                                cartProvider.increment(
+                                                    cartProvider
+                                                        .getItems[index]);
+                                              },
                                         icon: const Icon(
                                           FontAwesomeIcons.plus,
                                         ),
