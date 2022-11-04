@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:multi_vendor_01/controllers/snack_bar_controller.dart';
 import 'package:multi_vendor_01/provider/cart_provider.dart';
+import 'package:multi_vendor_01/provider/wishlist_provider.dart';
 import 'package:multi_vendor_01/views/cart_screen.dart';
 import 'package:multi_vendor_01/views/minor_screens/visit_store_screen.dart';
 import 'package:provider/provider.dart';
@@ -108,7 +109,26 @@ class ProductDetailScreen extends StatelessWidget {
                     ],
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<WishListProvider>(context, listen: false)
+                                  .getWishedItems
+                                  .firstWhereOrNull((product) =>
+                                      product.productId ==
+                                      productList['productId']) !=
+                              null
+                          ? snackBar(context, 'Item is already in the wishlist')
+                          : Provider.of<WishListProvider>(context,
+                                  listen: false)
+                              .addWishedItem(
+                              productList['productName'],
+                              productList['price'],
+                              1,
+                              productList['inStock'],
+                              productList['productImages'],
+                              productList['productId'],
+                              productList['sellerUid'],
+                            );
+                    },
                     icon: const Icon(
                       Icons.favorite_border_outlined,
                       color: Colors.red,

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_vendor_01/views/wishlist_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const String routeName = 'ProfileScreen';
@@ -143,7 +144,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return const WishListScreen();
+                                      },
+                                    ),
+                                  );
+                                },
                                 child: SizedBox(
                                   height: 40,
                                   width:
