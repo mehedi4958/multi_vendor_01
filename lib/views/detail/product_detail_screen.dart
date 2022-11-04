@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
@@ -271,7 +272,22 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                 );
               },
-              icon: const Icon(Icons.shopping_cart),
+              icon: Badge(
+                showBadge: Provider.of<CartProvider>(context).getItems.isEmpty
+                    ? false
+                    : true,
+                badgeColor: Colors.cyan,
+                badgeContent: Text(
+                  Provider.of<CartProvider>(context).getItems.length.toString(),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+                child: const Icon(
+                  Icons.shopping_cart,
+                ),
+              ),
             ),
             Container(
               height: 35,
