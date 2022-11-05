@@ -12,12 +12,14 @@ class WishListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.black87),
         elevation: 0,
         title: const Text(
           'Wish List',
           style: TextStyle(
             fontSize: 22,
             color: Colors.black87,
+            fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
