@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:multi_vendor_01/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'minor_screens/place_order_screen.dart';
+
 class CartScreen extends StatelessWidget {
   static const String routeName = 'CartScreen';
   const CartScreen({Key? key}) : super(key: key);
@@ -196,7 +198,18 @@ class CartScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25),
               ),
               child: MaterialButton(
-                onPressed: () {},
+                onPressed: context.watch<CartProvider>().totalPrice == 0.00
+                    ? null
+                    : () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) {
+                              return const PlaceOrderScreen();
+                            },
+                          ),
+                        );
+                      },
                 child: const Text(
                   'CHECK OUT',
                   style: TextStyle(
