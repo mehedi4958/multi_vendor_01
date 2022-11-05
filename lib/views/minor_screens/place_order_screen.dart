@@ -32,6 +32,7 @@ class PlaceOrderScreen extends StatelessWidget {
               appBar: AppBar(
                 backgroundColor: Colors.grey.shade200,
                 elevation: 0,
+                iconTheme: const IconThemeData(color: Colors.black87),
               ),
               body: Padding(
                 padding: const EdgeInsets.all(10.0),

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_vendor_01/provider/cart_provider.dart';
+import 'package:multi_vendor_01/views/customer_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
@@ -50,6 +51,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                 ),
                 centerTitle: true,
+                iconTheme: const IconThemeData(
+                  color: Colors.black87,
+                ),
               ),
               body: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -255,6 +259,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                 'paymentStatus':
                                                     'cash on delivery',
                                                 'orderReview': false,
+                                              }).whenComplete(() {
+                                                context
+                                                    .read<CartProvider>()
+                                                    .clearCart();
+                                                Navigator.of(context)
+                                                    .pushNamedAndRemoveUntil(
+                                                        CustomerHomeScreen
+                                                            .routeName,
+                                                        (route) => false);
                                               });
                                             }
                                           },
