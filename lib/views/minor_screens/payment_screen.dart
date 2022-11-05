@@ -5,6 +5,7 @@ import 'package:multi_vendor_01/provider/cart_provider.dart';
 import 'package:multi_vendor_01/views/customer_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({Key? key}) : super(key: key);
@@ -17,6 +18,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
   int selectedRadioButton = 0;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   late String orderId;
+
+  void showProgress() {
+    ProgressDialog progressDialog = ProgressDialog(context: context);
+    progressDialog.show(
+      max: 100,
+      msg: 'ORDER PLACING',
+      barrierColor: Colors.cyan,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double totalPrice = Provider.of<CartProvider>(context).totalPrice;
@@ -231,6 +242,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         ),
                                         child: MaterialButton(
                                           onPressed: () async {
+                                            showProgress();
                                             for (var item in context
                                                 .read<CartProvider>()
                                                 .getItems) {
