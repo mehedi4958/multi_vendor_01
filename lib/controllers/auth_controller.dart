@@ -52,6 +52,7 @@ class AuthController {
           'email': email,
           'image': imageUrl,
           'address': '',
+          'phone': '',
         });
         res = 'success';
         print('Account Created');

@@ -36,9 +36,27 @@ class PlaceOrderScreen extends StatelessWidget {
                   children: [
                     Container(
                       height: 90,
+                      width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Name: ${data['fullName']}',
+                            ),
+                            Text(
+                              'Address: ${data['address']}',
+                            ),
+                            Text(
+                              'Phone: ${data['phone']}',
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(
