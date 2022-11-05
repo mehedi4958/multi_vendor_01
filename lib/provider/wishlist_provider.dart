@@ -36,4 +36,9 @@ class WishListProvider extends ChangeNotifier {
     _list.removeWhere((element) => element.productId == id);
     notifyListeners();
   }
+
+  void removeWishedItem(Product product) {
+    _list.remove(product);
+    notifyListeners();
+  }
 }

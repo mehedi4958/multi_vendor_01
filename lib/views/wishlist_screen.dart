@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/wishlist_provider.dart';
@@ -89,6 +90,24 @@ class WishListScreen extends StatelessWidget {
                                           color: Colors.grey.shade200,
                                           borderRadius:
                                               BorderRadius.circular(15),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            IconButton(
+                                              onPressed: () {
+                                                context
+                                                    .read<WishListProvider>()
+                                                    .removeWishedItem(
+                                                        wishListProvider
+                                                                .getWishedItems[
+                                                            index]);
+                                              },
+                                              icon: const Icon(
+                                                FontAwesomeIcons.deleteLeft,
+                                                color: Colors.cyan,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
