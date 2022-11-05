@@ -194,7 +194,54 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (selectedRadioButton == 1) {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.30,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      const Text(
+                                        'Payment From Anywhere',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 40,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.90,
+                                        decoration: BoxDecoration(
+                                          color: Colors.cyan,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: MaterialButton(
+                                          onPressed: () {},
+                                          child: Center(
+                                            child: Text(
+                                              'Pay ${totalPaid.toStringAsFixed(2)} Now',
+                                              style: const TextStyle(
+                                                fontSize: 18,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                        },
                         child: Center(
                           child: Text(
                             'Confirm Payment ${totalPaid.toStringAsFixed(2)}',
