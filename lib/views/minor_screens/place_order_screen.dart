@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_vendor_01/provider/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class PlaceOrderScreen extends StatelessWidget {
   const PlaceOrderScreen({Key? key}) : super(key: key);
@@ -67,6 +69,40 @@ class PlaceOrderScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Consumer<CartProvider>(
+                          builder: (context, cartProvider, child) {
+                            return ListView.builder(
+                              itemCount: cartProvider.count,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 0.4),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          height: 100,
+                                          width: 100,
+                                          child: Image.network(
+                                            cartProvider
+                                                .getItems[index].imageUrls[0],
+                                          ),
+                                        ),
+                                        Text(
+                                          cartProvider.getItems[index].name,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
                         ),
                       ),
                     ),
