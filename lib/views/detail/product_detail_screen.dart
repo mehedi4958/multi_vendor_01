@@ -131,11 +131,23 @@ class ProductDetailScreen extends StatelessWidget {
                               productList['sellerUid'],
                             );
                     },
-                    icon: const Icon(
-                      Icons.favorite_border_outlined,
-                      color: Colors.red,
-                      size: 30,
-                    ),
+                    icon: context
+                                .watch<WishListProvider>()
+                                .getWishedItems
+                                .firstWhereOrNull((wished) =>
+                                    wished.productId ==
+                                    productList['productId']) !=
+                            null
+                        ? const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                            size: 30,
+                          )
+                        : const Icon(
+                            Icons.favorite_border_outlined,
+                            color: Colors.red,
+                            size: 30,
+                          ),
                   ),
                 ],
               ),
