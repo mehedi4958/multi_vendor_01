@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_vendor_01/provider/cart_provider.dart';
+import 'package:multi_vendor_01/views/minor_screens/payment_screen.dart';
 import 'package:provider/provider.dart';
 
 class PlaceOrderScreen extends StatelessWidget {
@@ -138,7 +139,15 @@ class PlaceOrderScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const PaymentScreen();
+                              },
+                            ),
+                          );
+                        },
                         child: const Center(
                           child: Text(
                             'Confirm Order',
