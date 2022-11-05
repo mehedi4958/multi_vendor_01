@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_vendor_01/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({Key? key}) : super(key: key);
@@ -13,6 +14,8 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   int selectedRadioButton = 0;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  late String orderId;
   @override
   Widget build(BuildContext context) {
     double totalPrice = Provider.of<CartProvider>(context).totalPrice;
@@ -223,7 +226,38 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                               BorderRadius.circular(10),
                                         ),
                                         child: MaterialButton(
-                                          onPressed: () {},
+                                          onPressed: () async {
+                                            for (var item in context
+                                                .read<CartProvider>()
+                                                .getItems) {
+                                              CollectionReference orderRef =
+                                                  _firestore
+                                                      .collection('orders');
+                                              orderId = const Uuid().v4();
+                                              await orderRef.doc(orderId).set({
+                                                'cid': data['cid'],
+                                                'customerName':
+                                                    data['fullName'],
+                                                'email': data['email'],
+                                                'address': data['address'],
+                                                'phone': data['phone'],
+                                                'profileImage': data['image'],
+                                                'sellerUid': item.sellerUid,
+                                                'productId': item.productId,
+                                                'orderId': orderId,
+                                                'orderImage':
+                                                    item.imageUrls.first,
+                                                'orderQuantity': item.quantity,
+                                                'orderPrice': totalPaid,
+                                                'deliveryStatus': 'preparing',
+                                                'deliveryDate': '',
+                                                'orderDate': DateTime.now(),
+                                                'paymentStatus':
+                                                    'cash on delivery',
+                                                'orderReview': false,
+                                              });
+                                            }
+                                          },
                                           child: Center(
                                             child: Text(
                                               'Pay ${totalPaid.toStringAsFixed(2)} Now',
