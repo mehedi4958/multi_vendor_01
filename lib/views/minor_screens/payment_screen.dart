@@ -4,9 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:multi_vendor_01/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
 
-class PaymentScreen extends StatelessWidget {
+class PaymentScreen extends StatefulWidget {
   const PaymentScreen({Key? key}) : super(key: key);
 
+  @override
+  State<PaymentScreen> createState() => _PaymentScreenState();
+}
+
+class _PaymentScreenState extends State<PaymentScreen> {
+  int selectedRadioButton = 0;
   @override
   Widget build(BuildContext context) {
     double totalPrice = Provider.of<CartProvider>(context).totalPrice;
@@ -33,6 +39,14 @@ class PaymentScreen extends StatelessWidget {
               appBar: AppBar(
                 backgroundColor: Colors.grey.shade200,
                 elevation: 0,
+                title: const Text(
+                  'Payment',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                centerTitle: true,
               ),
               body: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -126,6 +140,41 @@ class PaymentScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          children: [
+                            RadioListTile(
+                              value: 1,
+                              groupValue: selectedRadioButton,
+                              onChanged: (int? value) {
+                                setState(() {
+                                  selectedRadioButton = value!;
+                                });
+                              },
+                              title: const Text('Cash On Delivery'),
+                              subtitle: const Text('Payment From Home'),
+                            ),
+                            RadioListTile(
+                              value: 2,
+                              groupValue: selectedRadioButton,
+                              onChanged: (int? value) {
+                                setState(() {
+                                  selectedRadioButton = value!;
+                                });
+                              },
+                              title: const Text('Pay With Card'),
+                            ),
+                            RadioListTile(
+                              value: 3,
+                              groupValue: selectedRadioButton,
+                              onChanged: (int? value) {
+                                setState(() {
+                                  selectedRadioButton = value!;
+                                });
+                              },
+                              title: const Text('Pay With Stripe'),
+                            ),
+                          ],
                         ),
                       ),
                     ),
