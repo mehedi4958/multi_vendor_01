@@ -93,8 +93,24 @@ class PlaceOrderScreen extends StatelessWidget {
                                                 .getItems[index].imageUrls[0],
                                           ),
                                         ),
-                                        Text(
-                                          cartProvider.getItems[index].name,
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              cartProvider.getItems[index].name,
+                                            ),
+                                            Text(
+                                              cartProvider.getItems[index].price
+                                                  .toStringAsFixed(2),
+                                              style: const TextStyle(
+                                                color: Colors.cyan,
+                                                letterSpacing: 1.9,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
