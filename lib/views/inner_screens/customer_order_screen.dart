@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomerOrderScreen extends StatefulWidget {
   const CustomerOrderScreen({Key? key}) : super(key: key);
@@ -124,6 +125,30 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                         Text('Delivery Status: ${order['deliveryStatus']}'),
                         Text(
                             'Estimated Delivery Date: ${order['deliveryDate']}'),
+                        order['deliveryStatus'] == 'delivered' &&
+                                order['orderReview'] == false
+                            ? TextButton(
+                                onPressed: () {},
+                                child: const Text('Write Review'),
+                              )
+                            : const Text(''),
+                        order['deliveryStatus'] == 'delivered' &&
+                                order['orderReview'] == true
+                            ? Row(
+                                children: const [
+                                  Text(
+                                    'Review Added',
+                                    style: TextStyle(
+                                      color: Colors.cyan,
+                                    ),
+                                  ),
+                                  Icon(
+                                    FontAwesomeIcons.check,
+                                    color: Colors.green,
+                                  ),
+                                ],
+                              )
+                            : const Text(''),
                       ],
                     ),
                   ),
