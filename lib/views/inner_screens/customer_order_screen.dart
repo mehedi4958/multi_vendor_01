@@ -105,6 +105,29 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                     )
                   ],
                 ),
+                children: [
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.cyan.withOpacity(0.2),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Name: ${order['customerName']}'),
+                        Text('Email: ${order['email']}'),
+                        Text('Phone: ${order['phone']}'),
+                        Text('Address: ${order['address']}'),
+                        Text('Payment Status: ${order['paymentStatus']}'),
+                        Text('Delivery Status: ${order['deliveryStatus']}'),
+                        Text(
+                            'Estimated Delivery Date: ${order['deliveryDate']}'),
+                      ],
+                    ),
+                  ),
+                ],
               );
             },
           ),
