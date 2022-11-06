@@ -32,11 +32,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Widget build(BuildContext context) {
     double totalPrice = Provider.of<CartProvider>(context).totalPrice;
     double totalPaid = totalPrice + 10;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseAuth auth = FirebaseAuth.instance;
     CollectionReference customer =
         FirebaseFirestore.instance.collection('customers');
     return FutureBuilder(
-      future: customer.doc(_auth.currentUser!.uid).get(),
+      future: customer.doc(auth.currentUser!.uid).get(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
@@ -265,7 +265,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                 'orderImage':
                                                     item.imageUrls.first,
                                                 'orderQuantity': item.quantity,
-                                                'orderPrice': totalPaid,
+                                                'orderPrice':
+                                                    item.price * item.quantity,
                                                 'deliveryStatus': 'preparing',
                                                 'deliveryDate': '',
                                                 'orderDate': DateTime.now(),

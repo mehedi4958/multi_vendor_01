@@ -59,6 +59,7 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                     ),
                     Flexible(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             order['orderName'],
@@ -68,9 +69,40 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                           ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                order['orderPrice'].toStringAsFixed(2),
+                                style: const TextStyle(
+                                  color: Colors.cyan,
+                                ),
+                              ),
+                              Text('x ${order['orderQuantity']}'),
+                            ],
+                          ),
                         ],
                       ),
                     ),
+                  ],
+                ),
+                subtitle: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'See More...',
+                      style: TextStyle(
+                        color: Colors.cyan,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      order['deliveryStatus'],
+                      style: const TextStyle(
+                        color: Colors.cyan,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
                   ],
                 ),
               );
