@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_vendor_01/views/cart_screen.dart';
+import 'package:multi_vendor_01/views/inner_screens/customer_order_screen.dart';
+import 'package:multi_vendor_01/views/wishlist_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const String routeName = 'ProfileScreen';
@@ -13,11 +16,11 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseAuth auth = FirebaseAuth.instance;
     CollectionReference customer =
         FirebaseFirestore.instance.collection('customers');
     return FutureBuilder(
-      future: customer.doc(_auth.currentUser!.uid).get(),
+      future: customer.doc(auth.currentUser!.uid).get(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
@@ -97,7 +100,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return const CartScreen();
+                                      },
+                                    ),
+                                  );
+                                },
                                 child: SizedBox(
                                   height: 40,
                                   width:
@@ -117,7 +129,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Container(
                               color: Colors.cyan,
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return const CustomerOrderScreen();
+                                      },
+                                    ),
+                                  );
+                                },
                                 child: SizedBox(
                                   height: 40,
                                   width:
@@ -143,7 +164,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return const WishListScreen();
+                                      },
+                                    ),
+                                  );
+                                },
                                 child: SizedBox(
                                   height: 40,
                                   width:
@@ -187,9 +217,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   thickness: 1.6,
                                 ),
                               ),
-                              const RepeatedListTile(
+                              RepeatedListTile(
                                 title: 'Phone No',
-                                subtitle: '0123456789',
+                                subtitle: '${data['phone']}',
                                 leading: Icons.phone,
                               ),
                               const Padding(
@@ -199,9 +229,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   thickness: 1.6,
                                 ),
                               ),
-                              const RepeatedListTile(
+                              RepeatedListTile(
                                   title: 'Address',
-                                  subtitle: 'abc, ABC',
+                                  subtitle: '${data['address']}',
                                   leading: Icons.location_pin)
                             ],
                           ),

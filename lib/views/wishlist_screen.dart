@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:multi_vendor_01/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'minor_screens/place_order_screen.dart';
+import '../provider/wishlist_provider.dart';
 
-class CartScreen extends StatelessWidget {
-  static const String routeName = 'CartScreen';
-  const CartScreen({Key? key}) : super(key: key);
+class WishListScreen extends StatelessWidget {
+  static const String routeName = 'WishListScreen';
+  const WishListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.black87),
         elevation: 0,
         title: const Text(
-          'Cart',
+          'Wish List',
           style: TextStyle(
             fontSize: 22,
             color: Colors.black87,
+            fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
-              context.read<CartProvider>().clearCart();
+              context.read<WishListProvider>().clearWished();
             },
             icon: const Icon(
               Icons.delete_forever,
@@ -35,11 +36,11 @@ class CartScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: context.watch<CartProvider>().getItems.isNotEmpty
-          ? Consumer<CartProvider>(
-              builder: (context, cartProvider, child) {
+      body: context.watch<WishListProvider>().getWishedItems.isNotEmpty
+          ? Consumer<WishListProvider>(
+              builder: (context, wishListProvider, child) {
                 return ListView.builder(
-                  itemCount: cartProvider.count,
+                  itemCount: wishListProvider.count,
                   itemBuilder: (context, index) {
                     return Card(
                       child: SizedBox(
@@ -50,7 +51,8 @@ class CartScreen extends StatelessWidget {
                               height: 100,
                               width: 120,
                               child: Image.network(
-                                cartProvider.getItems[index].imageUrls[0]
+                                wishListProvider
+                                    .getWishedItems[index].imageUrls[0]
                                     .toString(),
                               ),
                             ),
@@ -61,7 +63,7 @@ class CartScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Text(
-                                    cartProvider.getItems[index].name,
+                                    wishListProvider.getWishedItems[index].name,
                                     maxLines: 2,
                                     style: const TextStyle(
                                       fontSize: 16,
@@ -73,7 +75,8 @@ class CartScreen extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        cartProvider.getItems[index].price
+                                        wishListProvider
+                                            .getWishedItems[index].price
                                             .toStringAsFixed(2),
                                         style: const TextStyle(
                                           color: Colors.cyan,
@@ -91,38 +94,17 @@ class CartScreen extends StatelessWidget {
                                         child: Row(
                                           children: [
                                             IconButton(
-                                              onPressed: cartProvider
-                                                          .getItems[index]
-                                                          .quantity ==
-                                                      1
-                                                  ? null
-                                                  : () {
-                                                      cartProvider.decrement(
-                                                          cartProvider
-                                                              .getItems[index]);
-                                                    },
+                                              onPressed: () {
+                                                context
+                                                    .read<WishListProvider>()
+                                                    .removeWishedItem(
+                                                        wishListProvider
+                                                                .getWishedItems[
+                                                            index]);
+                                              },
                                               icon: const Icon(
-                                                FontAwesomeIcons.minus,
-                                              ),
-                                            ),
-                                            Text(cartProvider
-                                                .getItems[index].quantity
-                                                .toString()),
-                                            IconButton(
-                                              onPressed: cartProvider
-                                                          .getItems[index]
-                                                          .quantity ==
-                                                      cartProvider
-                                                          .getItems[index]
-                                                          .inStock
-                                                  ? null
-                                                  : () {
-                                                      cartProvider.increment(
-                                                          cartProvider
-                                                              .getItems[index]);
-                                                    },
-                                              icon: const Icon(
-                                                FontAwesomeIcons.plus,
+                                                FontAwesomeIcons.deleteLeft,
+                                                color: Colors.cyan,
                                               ),
                                             ),
                                           ],
@@ -146,7 +128,7 @@ class CartScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Your cart is empty',
+                    'Your wishlist is empty',
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.blueGrey,
@@ -170,58 +152,6 @@ class CartScreen extends StatelessWidget {
                 ],
               ),
             ),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'Total: \$',
-              style: TextStyle(
-                fontSize: 17,
-                letterSpacing: 1,
-              ),
-            ),
-            Text(
-              Provider.of<CartProvider>(context).totalPrice.toStringAsFixed(2),
-              style: const TextStyle(
-                color: Colors.red,
-                fontSize: 17,
-                letterSpacing: 3,
-              ),
-            ),
-            Container(
-              height: 35,
-              width: MediaQuery.of(context).size.width * 0.45,
-              decoration: BoxDecoration(
-                color: Colors.black87,
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: MaterialButton(
-                onPressed: context.watch<CartProvider>().totalPrice == 0.00
-                    ? null
-                    : () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return const PlaceOrderScreen();
-                            },
-                          ),
-                        );
-                      },
-                child: const Text(
-                  'CHECK OUT',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

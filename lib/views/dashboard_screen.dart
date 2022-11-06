@@ -1,4 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_vendor_01/views/auth/seller_login_screen.dart';
+import 'package:multi_vendor_01/views/dashboard_screen/balance_screen.dart';
+import 'package:multi_vendor_01/views/dashboard_screen/edit_profile_screen.dart';
+import 'package:multi_vendor_01/views/dashboard_screen/manage_product_screen.dart';
+import 'package:multi_vendor_01/views/dashboard_screen/seller_orders_screen.dart';
+import 'package:multi_vendor_01/views/dashboard_screen/statistics_screen.dart';
+import 'package:multi_vendor_01/views/minor_screens/visit_store_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -27,6 +35,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Icons.show_chart,
   ];
 
+  List<Widget> pages = [
+    VisitStoreScreen(sellerUid: FirebaseAuth.instance.currentUser!.uid),
+    const SellerOrdersScreen(),
+    const EditProfileScreen(),
+    const ManageProductScreen(),
+    const BalanceScreen(),
+    const StatisticsScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +54,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
         title: const Text('Dashboard'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SellerLoginScreen()));
+            },
             icon: const Icon(
               Icons.logout,
               color: Colors.cyan,
@@ -53,26 +76,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
           crossAxisSpacing: 30,
           children: List.generate(
             6,
-            (index) => Card(
-              elevation: 15,
-              color: Colors.blueGrey.withOpacity(0.8),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Icon(
-                    icons[index],
-                    size: 50,
-                    color: Colors.cyan,
-                  ),
-                  Text(
-                    title[index],
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+            (index) => InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => pages[index]));
+              },
+              child: Card(
+                elevation: 15,
+                color: Colors.blueGrey.withOpacity(0.8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Icon(
+                      icons[index],
+                      size: 50,
+                      color: Colors.cyan,
                     ),
-                  ),
-                ],
+                    Text(
+                      title[index],
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

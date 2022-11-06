@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:multi_vendor_01/firebase_options.dart';
 import 'package:multi_vendor_01/provider/cart_provider.dart';
+import 'package:multi_vendor_01/provider/wishlist_provider.dart';
 import 'package:multi_vendor_01/views/auth/customer_login_screen.dart';
 import 'package:multi_vendor_01/views/auth/landing_customer_screen.dart';
 import 'package:multi_vendor_01/views/auth/landing_seller_screen.dart';
@@ -27,6 +28,11 @@ Future<void> main() async {
             return CartProvider();
           },
         ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return WishListProvider();
+          },
+        ),
       ],
       child: const MyApp(),
     ),
@@ -48,7 +54,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.cyan,
         fontFamily: 'Brand-Bold',
       ),
-      initialRoute: CustomerHomeScreen.routeName,
+      initialRoute: SellerHomeScreen.routeName,
       routes: {
         LandingCustomerScreen.routeName: (context) =>
             const LandingCustomerScreen(),
