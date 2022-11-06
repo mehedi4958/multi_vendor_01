@@ -48,8 +48,7 @@ class _SearchScreenState extends State<SearchScreen> {
           final searchResult = snapshot.data!.docs.where((e) {
             return e['productName']
                 .toLowerCase()
-                .contains(searchInput)
-                .toLowerCase();
+                .contains(searchInput.toLowerCase());
           });
           return ListView(
             children: searchResult.map((e) {

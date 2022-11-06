@@ -1,10 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_vendor_01/views/auth/seller_login_screen.dart';
 import 'package:multi_vendor_01/views/dashboard_screen/balance_screen.dart';
 import 'package:multi_vendor_01/views/dashboard_screen/edit_profile_screen.dart';
 import 'package:multi_vendor_01/views/dashboard_screen/manage_product_screen.dart';
 import 'package:multi_vendor_01/views/dashboard_screen/seller_orders_screen.dart';
-import 'package:multi_vendor_01/views/dashboard_screen/seller_store_screen.dart';
 import 'package:multi_vendor_01/views/dashboard_screen/statistics_screen.dart';
+import 'package:multi_vendor_01/views/minor_screens/visit_store_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -34,7 +36,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   ];
 
   List<Widget> pages = [
-    const SellerStoreScreen(),
+    VisitStoreScreen(sellerUid: FirebaseAuth.instance.currentUser!.uid),
     const SellerOrdersScreen(),
     const EditProfileScreen(),
     const ManageProductScreen(),
@@ -52,7 +54,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
         title: const Text('Dashboard'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SellerLoginScreen()));
+            },
             icon: const Icon(
               Icons.logout,
               color: Colors.cyan,
