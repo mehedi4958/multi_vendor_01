@@ -32,16 +32,50 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
           );
         }
 
-        return ListView(
-          children: snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map<String, dynamic> data =
-                document.data()! as Map<String, dynamic>;
-            return Material(
-              child: ListTile(
-                title: Text(data['customerName']),
+        return Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.white,
+            iconTheme: const IconThemeData(color: Colors.black87),
+            title: const Text(
+              'Orders',
+              style: TextStyle(
+                color: Colors.black87,
               ),
-            );
-          }).toList(),
+            ),
+            centerTitle: true,
+          ),
+          body: ListView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (context, index) {
+              var order = snapshot.data!.docs[index];
+              return ExpansionTile(
+                title: Row(
+                  children: [
+                    SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: Image.network(order['orderImage']),
+                    ),
+                    Flexible(
+                      child: Column(
+                        children: [
+                          Text(
+                            order['orderName'],
+                            style: const TextStyle(
+                              fontSize: 18,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         );
       },
     );
